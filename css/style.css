@@ -139,6 +139,7 @@ body {
         font-size: 1.8rem;
         border-left: 1px solid white;
         margin: 0 auto;
+        width: 80%;
     }
 
     .list{
