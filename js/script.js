@@ -22,11 +22,15 @@ function parameter(name,value) {
 async function waitingForResponse() {
     let param = parameter("q");
     if(param != undefined){
-        const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${parameter("key")}&q=${parameter("q")}`);
-        const todoList = await response.json();
+        const responseTown = await fetch(`http://api.weatherapi.com/v1/current.json?key=${parameter("key")}&q=${parameter("q")}`);
+        const todoListRTown = await responseTown.json();
 
-        // console.log(todoList)
-        recup(todoList);
+        recupTown(todoListRTown);   // Recover ionformations on the city
+
+        const responseDay = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${parameter("key")}&q=${parameter("q")}&days=3&aqi=no&alert=no`);
+        const todoListDay = await responseDay.json();
+
+        recupDay(todoListDay,todoListRTown);      // Send 3 days table maximum
     }
 }
 waitingForResponse();
