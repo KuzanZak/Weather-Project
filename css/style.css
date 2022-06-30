@@ -106,15 +106,22 @@ body {
 
 .conditions{
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 40% 60%;
     grid-row-gap: .5rem;    
-    width: 60%;
+    width: 85%;
+    align-items: center;
+    text-align: center;
 }
 
 .list{
     font-size: 1.4rem;
     color: var(--color-txt);
 }
+
+.icon-th, .icon-ws, .icon-c {
+    width: 30%;
+}
+
 
 .conditions-data{
     font-size: 1.4rem;
@@ -139,10 +146,15 @@ body {
         font-size: 1.8rem;
         border-left: 1px solid white;
         margin: 0 auto;
+        width: 80%;
     }
 
     .list{
         font-size: 1.6rem;
+    }
+
+    .icon-th {
+        width: 25%;
     }
     .conditions-data{
         font-size: 1.7rem;
