@@ -4,6 +4,9 @@ http://api.weatherapi.com/v1/current.json?key=********&q=paris
 
 https://www.flaticon.com/fr/packs/weather-340
 
+https://www.weatherapi.com/docs/#
+
+
 # couleurs #
 
 bg-color: #87BDFF;
