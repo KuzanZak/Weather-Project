@@ -41,24 +41,18 @@ async function waitingForResponse(name) {
 
 // Conditions // 
 function getName(array){
-    // console.log(array.location.name)
     document.getElementById("city-ttl").innerText = array.location.name;
 }
 function getTemp(array){
-    // console.log(array.current.temp_c)
     document.getElementById("condition-tp").innerText = array.current.temp_c + " °C";
 }
 function getCondition(array){
-    // console.log(array.current.condition.text)
     document.getElementById("condition-c").innerText = array.current.condition.text;
 }
 function getWind(array){
-    // console.log(array.current.wind_kph)
     document.getElementById("condition-ws").innerText = array.current.wind_kph + " km/h";
 }
 document.getElementById("header-form").addEventListener("submit", function(){
     waitingForResponse(document.getElementById("input-ville").value);
-    // if (event.target.classList.contains("input-button-ville")) {
-    // }
 });
 
