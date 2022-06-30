@@ -38,10 +38,26 @@ async function waitingForResponse(name) {
     getWind(todoList);
 }
 
+<<<<<<< HEAD
 
 // Conditions //
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
+=======
+async function waitingForResponse() {
+    let param = parameter("q");
+    if(param != undefined){
+        const responseTown = await fetch(`http://api.weatherapi.com/v1/current.json?key=${parameter("key")}&q=${parameter("q")}`);
+        const todoListRTown = await responseTown.json();
+
+        recupTown(todoListRTown);   // Recover ionformations on the city
+
+        const responseDay = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${parameter("key")}&q=${parameter("q")}&days=3&aqi=no&alert=no`);
+        const todoListDay = await responseDay.json();
+
+        recupDay(todoListDay,todoListRTown);      // Send 3 days table maximum
+    }
+>>>>>>> f8bf9a1e637b0f55659f73b04282657e760331e3
 }
 function getTemp(array){
     document.getElementById("condition-tp").innerText = array.current.temp_c + " °C";
