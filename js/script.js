@@ -1,6 +1,6 @@
 
 function parameter(name,value) {
-    // Ex: $(this).parameter([nom],[valeur]);
+    // Ex: parameter([nom],[valeur]);
     let loc = window.location.href, hist= window.history, parameters = loc.match(/[\\?&].([^&#]*)=([^&#]*)/g), data = {}, url = '?';
 
     for (let key in parameters) {
@@ -25,7 +25,7 @@ async function waitingForResponse() {
         const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${parameter("key")}&q=${parameter("q")}`);
         const todoList = await response.json();
 
-        console.log(todoList)
+        // console.log(todoList)
         recup(todoList);
     }
 }
