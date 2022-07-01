@@ -64,11 +64,12 @@ function getComplete(array){
     
     for (let i = 0; i < table.length; i++){
         let b = document.createElement("div");
-        b.innerHTML = `<strong> ${table[i].substr(0, val.length)} </strong>`
+        b.innerHTML = `<strong class="input-autocomplete"> ${table[i].substr(0, val.length)} </strong>`
         b.innerHTML += table[i].substr(val.length);
-        b.innerHTML += `<input type="hidden" value="${table[i]}">`;
+        b.innerHTML += `<input id="${i}" class="input-hidden" type="hidden" value="${table[i]}">`;
+        
         b.addEventListener("click", function(event){
-            input.value = this.getElementsByTagName("input")[i].value;
+            input.value = this.getElementsByTagName("input")[0].value;
             closeAllLists();
         });
         a.appendChild(b); 
