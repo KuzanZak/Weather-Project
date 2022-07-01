@@ -9,7 +9,8 @@
 }
 
 body {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
+    background-image: url(../img/cloud3.jpg);
     color: white;
 }
 
@@ -19,13 +20,13 @@ body {
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid white;
+    padding: 1rem;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1rem;
     width: 100%;
 }
 
@@ -46,7 +47,7 @@ body {
 .header-form {
     display: flex;
     justify-content: center;
-    padding-bottom: 1rem;
+    padding-top: .5rem;
 }
 
 .input-ville, .input-button-ville{
@@ -54,9 +55,12 @@ body {
 }
 
 .input-ville{
+    font-size: 1.5rem;
     padding: 0 1rem;
     text-align: center;
     border-radius: 2.4rem 0 0 2.4rem;
+    width: 20rem;
+    height: 2.5rem;
 }
 .input-button-ville{
     border-radius: 0 2.4rem 2.4rem 0;
@@ -79,11 +83,17 @@ body {
         display: none; 
     }
     .header-logo-desktop{
-        width: 10%;
+        width: 8rem;
     }
     .header-form {
-        padding-right: 1rem;
         height: 4rem;
+    }
+    .input-ville{
+        width: 35rem;
+        height: 3rem;
+    }
+    .input-button-ville{
+        height: 3rem;
     }
 }
 
