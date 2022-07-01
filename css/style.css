@@ -63,7 +63,12 @@ body {
     height: 2.5rem;
 }
 .input-button-ville{
+    width: 3rem;
     border-radius: 0 2.4rem 2.4rem 0;
+    background-image: url(../img/search.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    
 }
 
 
