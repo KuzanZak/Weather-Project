@@ -12,6 +12,7 @@ async function waitingForResponse(name) {
     recupDay(todoListDay,todoList);
 }
 
+listenFavorite();
 // Conditions // 
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;

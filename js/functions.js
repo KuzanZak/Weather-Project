@@ -15,6 +15,7 @@ function recupDay(api,town){
 
 function listenFavorite(){
     document.querySelector('.add-favorite').addEventListener('click', function(event){
+        console.log('test')
         event.preventDefault();
         const linkMenu = document.querySelector('.link-menu');
         const divInputFavorite = document.createElement('div');
