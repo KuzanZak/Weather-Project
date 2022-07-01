@@ -41,6 +41,9 @@ async function waitingForResponse(name) {
     const todoListDay = await responseDay.json();
     recupDay(todoListDay,todoList);
 }
+
+listenFavorite();
+displayFavorite();
 // Conditions //
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
