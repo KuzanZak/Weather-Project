@@ -1,11 +1,11 @@
 :root{
     font-size: 12px;
-    
-    /* Colors */ 
-    --primary-color: #4376e7; 
-    --secondary-color: #ffa73e; 
+
+    /* Colors */
+    --primary-color: #4376e7;
+    --secondary-color: #ffa73e;
     --background-color: #87BDFF;
-    --color-txt: white; 
+    --color-txt: white;
 }
 
 body {
@@ -13,7 +13,7 @@ body {
     color: white;
 }
 
-/* HEADER  */ 
+/* HEADER  */
 .header {
     display: grid;
     align-items: center;
