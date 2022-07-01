@@ -30,7 +30,7 @@
 // waitingForResponse();
 
 async function waitingForResponse(name) {
-    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&q=${name}`);
+    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}`);
     const todoList = await response.json();
     getName(todoList)
     getTemp(todoList)
@@ -38,7 +38,7 @@ async function waitingForResponse(name) {
     getWind(todoList);
 
     
-    const responseDay = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&q=${name}&days=3&aqi=no&alert=no`);
+    const responseDay = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
 
     recupDay(todoListDay,todoList);      // Send 3 days table maximum
