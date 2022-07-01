@@ -29,13 +29,13 @@ function listenFavorite(){
         listenInputFavorite(inputFavorite);
     });
 }
-
+// Favorite button's listener
 function listenInputFavorite(inputFavorite){
     inputFavorite.addEventListener('keyup', function(event){
         addFavorite(event, this)
     });
 }
-
+// Add favorites
 function addFavorite(event, $this){
     if ( event.keyCode == 13 ){
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
@@ -50,7 +50,7 @@ function addFavorite(event, $this){
         document.querySelector('.menu').append(li);
     }
 }
-
+// Display all favorites
 function displayFavorite(){
     if(localStorage.getItem('favorite-town')){
         console.log(localStorage.getItem('favorite-town').split("#"));
