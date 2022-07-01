@@ -6,8 +6,13 @@ async function waitingForResponse(name) {
     getTemp(todoList)
     getCondition(todoList);
     getWind(todoList);
+
+    const responseDay = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
+    const todoListDay = await responseDay.json();
+    recupDay(todoListDay,todoList);
 }
 
+listenFavorite();
 // Conditions // 
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
@@ -47,32 +52,32 @@ function getComplete(array){
     const table = [];
     let a;
     const input = document.getElementById("input-ville");
-    let val = input.value; 
+    let val = input.value;
     closeAllLists();
-    if (!val) {return false;} 
-    
+    if (!val) {return false;}
+
     a = document.createElement("div");
     a.setAttribute("id", input.id + "-autocomplete-list");
     a.setAttribute("class", "autocomplete-items")
     const div = document.getElementById("autocomplete");
     div.append(a)
 
-    array.forEach(cities => { 
+    array.forEach(cities => {
         table.push(cities.name)
     })
     console.log(table)
-    
+
     for (let i = 0; i < table.length; i++){
         let b = document.createElement("div");
         b.innerHTML = `<strong class="input-autocomplete"> ${table[i].substr(0, val.length)} </strong>`
         b.innerHTML += table[i].substr(val.length);
         b.innerHTML += `<input id="${i}" class="input-hidden" type="hidden" value="${table[i]}">`;
-        
+
         b.addEventListener("click", function(event){
             input.value = this.getElementsByTagName("input")[0].value;
             closeAllLists();
         });
-        a.appendChild(b); 
+        a.appendChild(b);
     }
 }
 autocomplete(document.getElementById("input-ville"))
