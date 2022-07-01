@@ -1,29 +1,13 @@
-function recupTown(town){
-    const displayTag = document.querySelector('.main');
-
-    displayTag.innerHTML += "<br>" + town.location.name;
-    displayTag.innerHTML += "<br>" + town.current.temp_c;
-    displayTag.innerHTML += "<br>" + town.current.gust_kph;
-    displayTag.innerHTML += "<br>" + town.current.condition.code;
-}
-
 function recupDay(api,town){
-    const contentList = document.querySelector('.listDay');
-    const meteoTown = document.createElement('dl');
+    const contentList = document.querySelector('.weatherTown dl');
+    contentList.innerHTML = '';
 
-    Object.values(api.forecast.forecastday).forEach(daily => {
-        meteoTown.classList.add('weatherTown');
-
-        meteoTown.innerHTML += '<dd><img src="http:' + daily.day.condition.icon + '" alt="">' + daily.date + '</dd>';
-
-        // console.log(daily.day.condition.icon);
-        document.querySelector('.listDay').appendChild(meteoTown);
+    Object.values(api.forecast.forecastday).forEach((daily,index) => {
+        const date = 	new Date(daily.date);
+        const days = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche",];
+        contentList.innerHTML += `<dt class="name-town${index}">${days[date.getDay()]} ${daily.date.split('-')[2]}</dt><dd class="icon-weather${index}"><img src="http:${daily.day.condition.icon}" alt=""></dd><dd class="current-temp${index}">${Math.round(daily.day.avgtemp_c)} °C</dd>`;
+        console.log(days[date.getDay()])
+        
     });
     console.log(api)
 }
-
-document.querySelector('.input-button-ville').addEventListener('click', function(event){
-    event.preventDefault();
-    parameter("key","bb17b7c52fa045b6aa5113146222906");
-    parameter("q",document.querySelector('.input-ville').value);
-});
