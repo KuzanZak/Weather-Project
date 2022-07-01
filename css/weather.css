@@ -1,6 +1,6 @@
 
 .weatherPerday{
-    display: flex;
+    display: none; /* flex | none */
     flex-direction: column;
     align-items: center;
     justify-content: center;
