@@ -66,6 +66,7 @@ function displayFavorite(){
             document.querySelector('.menu').append(li);
             favoriteHTML.addEventListener('click', function(event){
                 event.preventDefault();
+                // J'EN SUIS LAAAAAAAAAA ^^
                 console.log(this.innerText)
              });
         });
