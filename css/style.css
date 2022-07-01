@@ -9,7 +9,8 @@
 }
 
 body {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
+    background-image: url(../img/cloud3.jpg);
     color: white;
 }
 
@@ -57,6 +58,8 @@ body {
     padding: 0 1rem;
     text-align: center;
     border-radius: 2.4rem 0 0 2.4rem;
+    width: 20rem;
+    height: 2.5rem;
 }
 .input-button-ville{
     border-radius: 0 2.4rem 2.4rem 0;
@@ -84,6 +87,9 @@ body {
     .header-form {
         padding-right: 1rem;
         height: 4rem;
+    }
+    .input-ville{
+        width: 35rem;
     }
 }
 
