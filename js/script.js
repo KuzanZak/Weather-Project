@@ -8,7 +8,6 @@ async function waitingForResponse(name) {
     getWind(todoList);
 }
 
-
 // Conditions // 
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
