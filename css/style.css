@@ -87,13 +87,13 @@ body {
     }
 }
 
-
 /* MAIN */ 
 .first-content{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .city-ttl{
@@ -138,6 +138,9 @@ body {
     }
     .city-ttl{
         font-size: 2.5rem;
+    }
+    .country-ttl{
+        font-size: 2rem;
     }
     .header-logo-desktop{
         display: block;
