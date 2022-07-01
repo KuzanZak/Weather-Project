@@ -37,12 +37,9 @@ async function waitingForResponse(name) {
     getCondition(todoList);
     getWind(todoList);
 
-    
     const responseDay = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
-
-    recupDay(todoListDay,todoList);      // Send 3 days table maximum
-
+    recupDay(todoListDay,todoList);
 }
 // Conditions //
 function getName(array){
