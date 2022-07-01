@@ -1,11 +1,11 @@
 :root{
     font-size: 12px;
-    
-    /* Colors */ 
-    --primary-color: #4376e7; 
-    --secondary-color: #ffa73e; 
+
+    /* Colors */
+    --primary-color: #4376e7;
+    --secondary-color: #ffa73e;
     --background-color: #87BDFF;
-    --color-txt: white; 
+    --color-txt: white;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
     color: white;
 }
 
-/* HEADER  */ 
+/* HEADER  */
 .header {
     display: grid;
     align-items: center;
@@ -116,7 +116,7 @@ body {
         border-bottom: 1.5px solid white;
     }
     .header-logo-mobile{
-        display: none; 
+        display: none;
     }
     .header-logo-desktop{
         width: 8rem;
@@ -133,7 +133,7 @@ body {
     }
 } 
 
-/* MAIN */ 
+/* MAIN */
 .first-content{
     display: flex;
     flex-direction: column;
@@ -153,7 +153,7 @@ body {
 .conditions{
     display: grid;
     grid-template-columns: 40% 60%;
-    grid-row-gap: .5rem;    
+    grid-row-gap: .5rem;
     width: 85%;
     align-items: center;
     text-align: center;

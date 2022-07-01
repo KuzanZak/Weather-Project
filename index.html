@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/normalizer.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/weather.css">
     <link rel="icon" href="favicon.png">
     <title>Weather Project</title>
 </head>
@@ -23,6 +25,13 @@
             <input class="input-button-ville" type="submit" value="">
     </header>
     <section class="main">
+        <div class="favorite">
+            <ul class="menu">
+                <li class="link-menu">
+                    <a href="#" class="add-favorite"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une ville</a>
+                </li>
+            </ul>
+        </div>
         <div class="first-content">
             <div class="first-content-ttl">
                 <h2 id="city-ttl" class="city-ttl">Ville</h2>
@@ -38,8 +47,13 @@
             </dl>
         </div>
     </section>
-    
-
+    <section class="weatherPerday">
+        <h3>Prévisions sur 3 jours</h3>
+        <div class="weatherTown">
+            <dl></dl>
+        </div>
+    </section>
+    <script type="text/javascript" src="js/functions.js" ></script>
     <script type="text/javascript" src="js/script.js" ></script>
 </body>
 </html>
