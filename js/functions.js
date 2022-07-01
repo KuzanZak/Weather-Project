@@ -14,7 +14,7 @@ function recupDay(api,town){
 }
 
 function listenFavorite(){
-    document.querySelector('.link-favorite').addEventListener('click', function(event){
+    document.querySelector('.add-favorite').addEventListener('click', function(event){
         event.preventDefault();
         const linkMenu = document.querySelector('.link-menu');
         const divInputFavorite = document.createElement('div');
@@ -41,10 +41,13 @@ function addFavorite(event, $this){
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
         const favTown = (localStorage.getItem('favorite-town')) ? localStorage.getItem('favorite-town') + "#" + $this.value : $this.value;
         localStorage.setItem('favorite-town',favTown);
+        const li = document.createElement('li');
+        li.className = "link-menu";
         document.querySelector('.div-input-favorite').style.display = 'none';
         const linkFavorite = document.createElement('a');
         linkFavorite.innerHTML = `<a href="./&q=${$this.value}" class="fav fav-${$this.value}">${$this.value}</a>`;
-        document.querySelector('.favorite').append(linkFavorite);
+        li.append(linkFavorite);
+        document.querySelector('.menu').append(li);
     }
 }
 
@@ -53,11 +56,18 @@ function displayFavorite(){
         console.log(localStorage.getItem('favorite-town').split("#"));
         const localFavorite= localStorage.getItem('favorite-town').split("#");
         localFavorite.forEach(function(favorite){
+            const li = document.createElement('li');
             const favoriteHTML = document.createElement("a");
-            favoriteHTML.className = `fav fav-${favorite}`;
+            li.className = "link-menu";
+            favoriteHTML.className = `fav fav-${favorite.replace(' ','-')}`;
+            favoriteHTML.href = `#&q=${favorite}`;
             favoriteHTML.append(favorite);
-            document.querySelector('.favorite').append(favoriteHTML);
-
+            li.appendChild(favoriteHTML);
+            document.querySelector('.menu').append(li);
+            favoriteHTML.addEventListener('click', function(event){
+                event.preventDefault();
+                console.log(this.innerText)
+             });
         });
     }
 }
