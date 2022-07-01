@@ -9,7 +9,8 @@
 }
 
 body {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
+    background-image: url(../img/cloud3.jpg);
     color: white;
 }
 
