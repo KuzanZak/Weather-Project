@@ -8,7 +8,6 @@ async function waitingForResponse(name) {
     getWind(todoList);
 }
 
-
 // Conditions // 
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
@@ -31,3 +30,62 @@ document.getElementById("header-form").addEventListener("submit", function(){
     waitingForResponse(document.getElementById("input-ville").value);
 });
 
+// Autocomplete //
+
+function autocomplete(inp){
+    inp.addEventListener("input", function(event){
+        waitingForResponseSearch(document.getElementById("input-ville").value);
+    });
+}
+async function waitingForResponseSearch(name) {
+    const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}`);
+    const todoListSearch = await response.json();
+    getComplete(todoListSearch)
+}
+
+function getComplete(array){
+    const table = [];
+    let a;
+    const input = document.getElementById("input-ville");
+    let val = input.value; 
+    closeAllLists();
+    if (!val) {return false;} 
+    
+    a = document.createElement("div");
+    a.setAttribute("id", input.id + "-autocomplete-list");
+    a.setAttribute("class", "autocomplete-items")
+    const div = document.getElementById("autocomplete");
+    div.append(a)
+
+    array.forEach(cities => { 
+        table.push(cities.name)
+    })
+    console.log(table)
+    
+    for (let i = 0; i < table.length; i++){
+        let b = document.createElement("div");
+        b.innerHTML = `<strong class="input-autocomplete"> ${table[i].substr(0, val.length)} </strong>`
+        b.innerHTML += table[i].substr(val.length);
+        b.innerHTML += `<input id="${i}" class="input-hidden" type="hidden" value="${table[i]}">`;
+        
+        b.addEventListener("click", function(event){
+            input.value = this.getElementsByTagName("input")[0].value;
+            closeAllLists();
+        });
+        a.appendChild(b); 
+    }
+}
+autocomplete(document.getElementById("input-ville"))
+
+
+function closeAllLists(elm){
+    let x = document.getElementsByClassName("autocomplete-items");
+    for (let i = 0; i < x.length; i++) {
+        if (elm != x[i] && elm != document.getElementById("input-ville")){
+            x[i].parentNode.removeChild(x[i]);
+        }
+    }
+}
+document.addEventListener("click", function(event){
+    closeAllLists(event.target);
+})
