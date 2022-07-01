@@ -1,38 +1,8 @@
-
-// function parameter(name,value) {
-//     let loc = window.location.href, hist= window.history, parameters = loc.match(/[\\?&].([^&#]*)=([^&#]*)/g), data = {}, url = '?';
-
-//     for (let key in parameters) {
-//         let couple = parameters[key].substring(1, parameters[key].length).split('=');  // A chaque fois qu'on trouve l'occurrence "="
-//         data[couple[0]] = couple[1];                                                   // Tableau
-//     }
-
-//     if (value == null)  return data[name] ? data[name] : null;
-//     if (value != false) data[name] = value;
-
-//     for (let key in data) {
-//         if (value == false && key == name) continue;                                  // On passe si la valeur est fausse ou si la clé est égale au nom
-//         url = url.concat(key.concat('=' + data[key]+'&'));                            // Concaténation de la nouvelle adresse
-//     }
-//     hist.pushState('', document.title, url.substring(0, url.length-1));               // On modifie l'historique de navigation
-//     location.reload();
-// }
-
-// async function waitingForResponse() {
-//     let param = parameter("q");
-//     if(param != undefined){
-//         const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${parameter("key")}&q=${parameter("q")}`);
-//         const todoList = await response.json();
-
-//         recup(todoList);
-//     }
-// }
-// waitingForResponse();
-
 async function waitingForResponse(name) {
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}`);
     const todoList = await response.json();
     getName(todoList)
+    getCountry(todoList)
     getTemp(todoList)
     getCondition(todoList);
     getWind(todoList);
@@ -42,12 +12,15 @@ async function waitingForResponse(name) {
     recupDay(todoListDay,todoList);
 }
 
-listenFavorite();
-displayFavorite();
-// Conditions //
+// Conditions // 
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
 }
+
+function getCountry(array){
+    document.getElementById("country-ttl").innerText = array.location.country;
+}
+
 function getTemp(array){
     document.getElementById("condition-tp").innerText = array.current.temp_c + " °C";
 }
@@ -60,3 +33,63 @@ function getWind(array){
 document.getElementById("header-form").addEventListener("submit", function(){
     waitingForResponse(document.getElementById("input-ville").value);
 });
+
+// Autocomplete //
+
+function autocomplete(inp){
+    inp.addEventListener("input", function(event){
+        waitingForResponseSearch(document.getElementById("input-ville").value);
+    });
+}
+async function waitingForResponseSearch(name) {
+    const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}`);
+    const todoListSearch = await response.json();
+    getComplete(todoListSearch)
+}
+
+function getComplete(array){
+    const table = [];
+    let a;
+    const input = document.getElementById("input-ville");
+    let val = input.value;
+    closeAllLists();
+    if (!val) {return false;}
+
+    a = document.createElement("div");
+    a.setAttribute("id", input.id + "-autocomplete-list");
+    a.setAttribute("class", "autocomplete-items")
+    const div = document.getElementById("autocomplete");
+    div.append(a)
+
+    array.forEach(cities => {
+        table.push(cities.name)
+    })
+    console.log(table)
+
+    for (let i = 0; i < table.length; i++){
+        let b = document.createElement("div");
+        b.innerHTML = `<strong class="input-autocomplete"> ${table[i].substr(0, val.length)} </strong>`
+        b.innerHTML += table[i].substr(val.length);
+        b.innerHTML += `<input id="${i}" class="input-hidden" type="hidden" value="${table[i]}">`;
+
+        b.addEventListener("click", function(event){
+            input.value = this.getElementsByTagName("input")[0].value;
+            closeAllLists();
+        });
+        a.appendChild(b);
+    }
+}
+autocomplete(document.getElementById("input-ville"))
+
+
+function closeAllLists(elm){
+    let x = document.getElementsByClassName("autocomplete-items");
+    for (let i = 0; i < x.length; i++) {
+        if (elm != x[i] && elm != document.getElementById("input-ville")){
+            x[i].parentNode.removeChild(x[i]);
+        }
+    }
+}
+document.addEventListener("click", function(event){
+    closeAllLists(event.target);
+})

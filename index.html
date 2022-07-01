@@ -18,10 +18,11 @@
             <img class="header-logo-desktop" src="img/logo-desktop.png" alt="logo de ZYM WEATHER">
             <h1 class="header-ttl">zym weather</h1>
         </div>
-        <form id="header-form" class="header-form" action="#">
-            <input id="input-ville" class="input-ville" type="text" placeholder="Rechercher une ville" maxlength="30">
-            <input class="input-button-ville" type="submit" value="OK">
-        </form>
+        <form autocomplete= "off" id="header-form" class="header-form" action="#">
+            <div id="autocomplete" class="autocomplete">
+                <input id="input-ville" class="input-ville" type="text" placeholder="Rechercher une ville" maxlength="30">
+            </div>
+            <input class="input-button-ville" type="submit" value="">
     </header>
     <section class="main">
         <div class="favorite">
@@ -32,7 +33,10 @@
             </ul>
         </div>
         <div class="first-content">
-            <h2 id="city-ttl" class="city-ttl">Ville</h2>
+            <div class="first-content-ttl">
+                <h2 id="city-ttl" class="city-ttl">Ville</h2>
+                <h3 id="country-ttl" class="country-ttl">Pays</h3>
+            </div>
             <dl class="conditions">
                 <dt class="list"><img class="icon-th" src="img/thermometre.png" alt="icon thermometre"></dt>
                 <dd id="condition-tp" class="conditions-data">15°C</dd>
