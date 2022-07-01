@@ -15,7 +15,7 @@ body {
 }
 
 /* HEADER  */ 
-.header {
+/* .header {
     display: grid;
     align-items: center;
     justify-content: center;
@@ -64,10 +64,57 @@ body {
 }
 .input-button-ville{
     border-radius: 0 2.4rem 2.4rem 0;
+} */
+
+/* AUTOCOMPLETE */ 
+.autocomplete{
+    position: relative;
+    display: inline-block; 
+    width: 25rem;
+}
+
+input {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+}
+input[type=text] {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+input[type=submit] {
+    background-color: DodgerBlue;
+    color: #fff;
+}
+.autocomplete-items{
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+  }
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
 }
 
 
-@media screen and (min-width: 768px){
+
+/* @media screen and (min-width: 768px){
     .header{
         width: 75%;
         margin: 0 auto;
@@ -95,10 +142,10 @@ body {
     .input-button-ville{
         height: 3rem;
     }
-}
+} */
 
 /* MAIN */ 
-.first-content{
+/* .first-content{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -172,4 +219,4 @@ body {
     .conditions-data{
         font-size: 1.7rem;
     }
-}
+} */
