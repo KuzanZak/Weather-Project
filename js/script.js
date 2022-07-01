@@ -2,6 +2,7 @@ async function waitingForResponse(name) {
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&q=${name}`);
     const todoList = await response.json();
     getName(todoList)
+    getCountry(todoList)
     getTemp(todoList)
     getCondition(todoList);
     getWind(todoList);
@@ -12,6 +13,11 @@ async function waitingForResponse(name) {
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
 }
+
+function getCountry(array){
+    document.getElementById("country-ttl").innerText = array.location.country;
+}
+
 function getTemp(array){
     document.getElementById("condition-tp").innerText = array.current.temp_c + " °C";
 }
