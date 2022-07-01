@@ -1,5 +1,5 @@
 async function waitingForResponse(name) {
-    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&q=${name}`);
+    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}`);
     const todoList = await response.json();
     getName(todoList)
     getCountry(todoList)
