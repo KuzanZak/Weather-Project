@@ -55,12 +55,24 @@ function addFavorite(event, $this){
         localStorage.setItem("favorites", favoriteTab);
 
         const li = document.createElement('li');
-        li.classList.add("link-menu");
-        document.querySelector('.div-input-favorite').style.display = 'none';
-        const linkFavorite = document.createElement('a');
-        linkFavorite.innerHTML = `<a href="#" class="fav">${$this.value}</a>`;
-        li.append(linkFavorite);
-        document.querySelector('.menu').append(li);
+        const favoriteLink = document.createElement("a");
+        const iconDelete = document.createElement("i");
+        iconDelete.classList.add("fa");
+        iconDelete.classList.add("fa-times");
+        iconDelete.classList.add("delete");
+        iconDelete.setAttribute("aria-hidden", "true");
+
+        li.className = "link-menu";
+        favoriteLink.className = `fav`;
+        favoriteLink.href = `#${town}`;
+        favoriteLink.append(town);
+        li.appendChild(favoriteLink);
+        li.appendChild(iconDelete);
+        document.querySelector('.menu').prepend(li);
+        favoriteLink.addEventListener('click', function(event){
+            event.preventDefault();
+            waitingForResponse(this.innerText);
+        });
     }
 }
 displayFavorite();
