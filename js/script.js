@@ -14,7 +14,6 @@ async function waitingForResponse(name) {
 
 listenFavorite();
 
-
 // Conditions // 
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;

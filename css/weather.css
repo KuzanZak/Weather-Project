@@ -8,13 +8,25 @@
     width: 100%;
     height: 3rem;
 }
-.favorite a.fav{
+.favorite li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     color: var(--color-text);
-    text-transform: capitalize;
-    padding: 0 1rem;
     background: rgb(10, 109, 215);
-    margin-right: 5px;
     border-radius: 5px;
+    padding: 0 1rem;
+    margin: 0 .5rem;
+}
+.link-menu:nth-child(1){
+    background: none;
+}
+.favorite a.fav{
+    text-transform: capitalize;
+    padding: 0 1rem 0 1rem;
+}
+.favorite a, .favorite i{
+    font-size: 1.2rem;
 }
 .favorite ul{
     width: 75%;
@@ -39,7 +51,7 @@
     z-index: 900;
     width: 75%;
     height: 150px;
-    margin-top: 2rem;
+    margin-top: .5rem;
 }
 .input-favorite{
     padding: 2px 5px;
