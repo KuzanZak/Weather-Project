@@ -70,18 +70,29 @@ function displayFavorite(){
     if(favorite !== null){
         favorite.forEach(function(fav){
             const li = document.createElement('li');
-            const favoriteHTML = document.createElement("a");
+            const favoriteLink = document.createElement("a");
+            const iconDelete = document.createElement("i");
+            iconDelete.classList.add("fa");
+            iconDelete.classList.add("fa-times");
+            iconDelete.classList.add("delete");
+            iconDelete.setAttribute("aria-hidden", "true");
+
             li.className = "link-menu";
-            favoriteHTML.className = `fav`;
-            favoriteHTML.href = `#${fav}`;
-            favoriteHTML.append(fav);
-            li.appendChild(favoriteHTML);
+            favoriteLink.className = `fav`;
+            favoriteLink.href = `#${fav}`;
+            favoriteLink.append(fav);
+            li.appendChild(favoriteLink);
+            li.appendChild(iconDelete);
+
             document.querySelector('.menu').append(li);
             // Listen favorite and request
-            favoriteHTML.addEventListener('click', function(event){
+            favoriteLink.addEventListener('click', function(event){
                 event.preventDefault();
                 waitingForResponse(this.innerText);
-             });
+            });
+            iconDelete.addEventListener('click', function(event){
+
+            });
         });
     }
 }
