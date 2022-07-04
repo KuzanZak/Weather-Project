@@ -65,8 +65,7 @@ function getComplete(array){
     array.forEach(cities => {
         table.push(cities.name)
     })
-    console.log(table)
-
+    
     for (let i = 0; i < table.length; i++){
         let b = document.createElement("div");
         b.innerHTML = `<strong class="input-autocomplete"> ${table[i].substr(0, val.length)} </strong>`

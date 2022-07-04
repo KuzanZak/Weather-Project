@@ -50,8 +50,8 @@
     position: absolute;
     z-index: 900;
     width: 75%;
-    height: 150px;
-    margin-top: .5rem;
+    height: 50px;
+    margin-top: 6.5rem;
 }
 .input-favorite{
     padding: 2px 5px;
