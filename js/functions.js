@@ -1,6 +1,6 @@
 const favoritesTAB = [];
 const favoriteJson = JSON.parse(localStorage.getItem("favorites"));
-favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
+if(favoriteJson != null) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
 
 function recupDay(api,town){
     const contentList = document.querySelector('.weatherTown dl');
@@ -23,7 +23,7 @@ function listenAddFavorite(){
         event.preventDefault();
         if(!document.querySelector('.div-input-favorite')){
 
-            const linkMenu = document.querySelector('.link-menu');
+            const linkMenu = document.querySelector('.menu');
             const divInputFavorite = document.createElement('div');
             divInputFavorite.classList.add('div-input-favorite');
             const inputFavorite = document.createElement('input');
@@ -55,12 +55,24 @@ function addFavorite(event, $this){
         localStorage.setItem("favorites", favoriteTab);
 
         const li = document.createElement('li');
+        const favoriteLink = document.createElement("a");
+        const iconDelete = document.createElement("i");
+        iconDelete.classList.add("fa");
+        iconDelete.classList.add("fa-times");
+        iconDelete.classList.add("delete");
+        iconDelete.setAttribute("aria-hidden", "true");
+
         li.className = "link-menu";
-        document.querySelector('.div-input-favorite').style.display = 'none';
-        const linkFavorite = document.createElement('a');
-        linkFavorite.innerHTML = `<a href="#" class="fav">${$this.value}</a>`;
-        li.append(linkFavorite);
-        document.querySelector('.menu').append(li);
+        favoriteLink.className = `fav`;
+        favoriteLink.href = `#${town}`;
+        favoriteLink.append(town);
+        li.appendChild(favoriteLink);
+        li.appendChild(iconDelete);
+        document.querySelector('.menu').prepend(li);
+        favoriteLink.addEventListener('click', function(event){
+            event.preventDefault();
+            waitingForResponse(this.innerText);
+        });
     }
 }
 displayFavorite();
@@ -86,7 +98,7 @@ function displayFavorite(){
             li.appendChild(favoriteLink);
             li.appendChild(iconDelete);
 
-            document.querySelector('.menu').append(li);
+            document.querySelector('.menu').prepend(li);
             // Listen favorite and request
             favoriteLink.addEventListener('click', function(event){
                 event.preventDefault();
