@@ -15,17 +15,17 @@
     color: var(--color-text);
     background: rgb(10, 109, 215);
     border-radius: 5px;
-    margin-right: 1rem;
+    padding: 0 1rem;
+    margin: 0 .5rem;
 }
 .link-menu:nth-child(1){
     background: none;
 }
 .favorite a.fav{
     text-transform: capitalize;
-    padding: 0 .5rem 0 1rem;
+    padding: 0 1rem 0 1rem;
 }
-.favorite a i{
-    margin-left: 1rem;
+.favorite a, .favorite i{
     font-size: 1.2rem;
 }
 .favorite ul{
