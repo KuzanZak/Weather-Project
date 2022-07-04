@@ -1,6 +1,6 @@
 const favoritesTAB = [];
 const favoriteJson = JSON.parse(localStorage.getItem("favorites"));
-favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
+if(favoriteJson != null) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
 
 function recupDay(api,town){
     const contentList = document.querySelector('.weatherTown dl');
