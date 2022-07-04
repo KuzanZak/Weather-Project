@@ -15,19 +15,22 @@ function recupDay(api,town){
 
 function listenFavorite(){
     document.querySelector('.add-favorite').addEventListener('click', function(event){
-        console.log('test')
         event.preventDefault();
-        const linkMenu = document.querySelector('.link-menu');
-        const divInputFavorite = document.createElement('div');
-        divInputFavorite.classList.add('div-input-favorite');
-        const inputFavorite = document.createElement('input');
-        inputFavorite.type = 'text';
-        inputFavorite.classList.add('input-favorite');
-        divInputFavorite.appendChild(inputFavorite);
-        linkMenu.appendChild(divInputFavorite);
+        if(!document.querySelector('.div-input-favorite')){
 
-        document.querySelector('.div-input-favorite').style.display = 'block';
-        listenInputFavorite(inputFavorite);
+            const linkMenu = document.querySelector('.link-menu');
+            const divInputFavorite = document.createElement('div');
+            divInputFavorite.classList.add('div-input-favorite');
+            const inputFavorite = document.createElement('input');
+            inputFavorite.type = 'text';
+            inputFavorite.classList.add('input-favorite');
+            divInputFavorite.appendChild(inputFavorite);
+            linkMenu.appendChild(divInputFavorite);
+
+            document.querySelector('.div-input-favorite').style.display = 'block';
+            listenInputFavorite(inputFavorite);
+        }
+        else { document.querySelector('.div-input-favorite').remove(); }
     });
 }
 // Favorite button's listener
