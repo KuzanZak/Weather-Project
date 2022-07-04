@@ -12,7 +12,6 @@ async function waitingForResponse(name) {
     recupDay(todoListDay,todoList);
 }
 
-listenAddFavorite();
 // Conditions //
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
@@ -31,8 +30,10 @@ function getCondition(array){
 function getWind(array){
     document.getElementById("condition-ws").innerText = array.current.wind_kph + " km/h";
 }
+
 document.getElementById("header-form").addEventListener("submit", function(){
     waitingForResponse(document.getElementById("input-ville").value);
+    waitingForResponseAstronomy(document.getElementById("input-ville").value);
 });
 
 // Autocomplete //
@@ -65,7 +66,7 @@ function getComplete(array){
     array.forEach(cities => {
         table.push(cities.name)
     })
-    
+
     for (let i = 0; i < table.length; i++){
         let b = document.createElement("div");
         b.innerHTML = `<strong class="input-autocomplete"> ${table[i].substr(0, val.length)} </strong>`
@@ -93,3 +94,19 @@ function closeAllLists(elm){
 document.addEventListener("click", function(event){
     closeAllLists(event.target);
 })
+
+// ASTRONOMY // 
+async function waitingForResponseAstronomy(name) {
+    const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&dt=2022-07-04`);
+    const todoListAstronomy = await response.json();
+    getSunrise(todoListAstronomy)
+    getSunset(todoListAstronomy)
+}
+
+function getSunrise(array){
+    document.getElementById("sunrise-conditions").innerHTML = array.astronomy.astro.sunrise.replace("AM", "<sup>AM</sup>");
+}
+
+function getSunset(array){
+    document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");}
+
