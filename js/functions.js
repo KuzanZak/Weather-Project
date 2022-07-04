@@ -1,3 +1,5 @@
+const favorites = [];
+
 function recupDay(api,town){
     const contentList = document.querySelector('.weatherTown dl');
     contentList.innerHTML = '';
@@ -43,8 +45,11 @@ function listenInputFavorite(inputFavorite){
 function addFavorite(event, $this){
     if ( event.keyCode == 13 ){
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
-        const favTown = (localStorage.getItem('favorite-town')) ? localStorage.getItem('favorite-town') + "#" + $this.value : $this.value;
-        localStorage.setItem('favorite-town',favTown);
+        const favTown = $this.value;
+        favorites.push([favorites.length,favTown]);
+        const favoriteTab = JSON.stringify(favorites);
+        localStorage.setItem("favorites", favoriteTab);
+
         const li = document.createElement('li');
         li.className = "link-menu";
         document.querySelector('.div-input-favorite').style.display = 'none';
@@ -54,18 +59,20 @@ function addFavorite(event, $this){
         document.querySelector('.menu').append(li);
     }
 }
+displayFavorite();
+
 // Display all favorites
 function displayFavorite(){
-    if(localStorage.getItem('favorite-town')){
-        console.log(localStorage.getItem('favorite-town').split("#"));
-        const localFavorite= localStorage.getItem('favorite-town').split("#");
-        localFavorite.forEach(function(favorite){
+    const favoriteJson = localStorage.getItem("favorites");
+    const favorite = JSON.parse(favoriteJson);
+    if(favorite.length > 0){
+        favorite.forEach(function(fav){
             const li = document.createElement('li');
             const favoriteHTML = document.createElement("a");
             li.className = "link-menu";
-            favoriteHTML.className = `fav fav-${favorite.replace(' ','-')}`;
-            favoriteHTML.href = `#${favorite}`;
-            favoriteHTML.append(favorite);
+            favoriteHTML.className = `fav`;
+            favoriteHTML.href = `#${fav[1]}`;
+            favoriteHTML.append(fav[1]);
             li.appendChild(favoriteHTML);
             document.querySelector('.menu').append(li);
             // Listen favorite and request
