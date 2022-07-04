@@ -13,7 +13,7 @@ function recupDay(api,town){
     console.log(api)
 }
 
-function listenFavorite(){
+function listenAddFavorite(){
     document.querySelector('.add-favorite').addEventListener('click', function(event){
         event.preventDefault();
         if(!document.querySelector('.div-input-favorite')){
@@ -39,7 +39,7 @@ function listenInputFavorite(inputFavorite){
         addFavorite(event, this)
     });
 }
-// Add favorites
+// Add favorites on screen
 function addFavorite(event, $this){
     if ( event.keyCode == 13 ){
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
@@ -64,14 +64,14 @@ function displayFavorite(){
             const favoriteHTML = document.createElement("a");
             li.className = "link-menu";
             favoriteHTML.className = `fav fav-${favorite.replace(' ','-')}`;
-            favoriteHTML.href = `#&q=${favorite}`;
+            favoriteHTML.href = `#${favorite}`;
             favoriteHTML.append(favorite);
             li.appendChild(favoriteHTML);
             document.querySelector('.menu').append(li);
+            // Listen favorite and request
             favoriteHTML.addEventListener('click', function(event){
                 event.preventDefault();
-                // J'EN SUIS LAAAAAAAAAA ^^
-                console.log(this.innerText)
+                waitingForResponse(this.innerText);
              });
         });
     }
