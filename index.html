@@ -20,14 +20,14 @@
         </div>
         <form autocomplete= "off" id="header-form" class="header-form" action="#">
             <div id="autocomplete" class="autocomplete">
-                <input id="input-ville" class="input-ville" type="text" placeholder="Rechercher une ville" maxlength="30">
+                <input id="input-ville" class="input-ville" type="text" placeholder="Rechercher une ville" maxlength="50">
             </div>
             <input class="input-button-ville" type="submit" value="">
     </header>
     <section class="main">
         <div class="favorite">
             <ul class="menu">
-                <li class="link-menu">
+                <li class="link-menu link-add-favorite">
                     <a href="#" class="add-favorite"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une ville</a>
                 </li>
             </ul>
@@ -45,6 +45,12 @@
                 <dd id="condition-ws" class="conditions-data">100km/h</dd>
                 <dt class="list"><img class="icon-c" src="img/condition.png" alt="weather condition"></dt>
                 <dd id="condition-c" class="conditions-data">Nuageux</dd>
+            </dl>
+            <dl class="sun-conditions">
+                <dt class="sun-list"><img class="icon-sunrise" src="img/sunrise.png" alt="sunrise icon"></dt>
+                <dd class="sunrise-conditions" id="sunrise-conditions"></dd> 
+                <dt class="sun-list"><img class="icon-sunset" src="img/sunset.png" alt="sunset icon"></dt>
+                <dd class="sunset-conditions" id="sunset-conditions"></dd>
             </dl>
         </div>
     </section>

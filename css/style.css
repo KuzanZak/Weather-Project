@@ -10,7 +10,7 @@
 
 body {
     /* background-color: var(--background-color); */
-    background-image: url(../img/cloud3.jpg);
+    background-image: url(../img/cloud3.mini.jpg);
     background-repeat: no-repeat;
     /* background-size: cover; */
     color: white;
@@ -179,6 +179,10 @@ body {
     text-align: center;
 }
 
+.conditions, .sun-conditions, .weatherTown dd{
+    text-shadow: 0 .2rem .5rem black;
+}
+
 .list{
     font-size: 1.4rem;
     color: var(--color-txt);
@@ -195,7 +199,8 @@ body {
 
 @media screen and (min-width: 768px){
     .first-content{
-        grid-template-columns: 30% 70%;
+        display: grid;
+        grid-template-columns: 20% 60% 20%;
         text-align: center;
         align-items: center;
         width: 75%;
@@ -216,15 +221,52 @@ body {
         margin: 0 auto;
         width: 80%;
     }
-
     .list{
         font-size: 1.6rem;
-    }
-
-    .icon-th {
-        width: 25%;
     }
     .conditions-data{
         font-size: 1.7rem;
     }
 } 
+
+/* ASTRONOMY */ 
+.sun-conditions{
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 1fr;
+    align-items: center;
+    width: 85%;
+}
+
+.icon-sunrise, .icon-sunset{
+    width: 30%;
+}
+
+.sunrise-conditions, .sunset-conditions{
+    font-size: 1.4rem;
+}
+sup{
+    font-size: .7rem;
+}
+
+@media screen and (min-width: 768px) {
+    .sun-conditions{
+        border-left: 1px solid white;
+        width: 99%;
+        
+    }
+    
+    .sun-list{
+        width: 100%;
+    }
+
+    .icon-sunrise, .icon-sunset{
+        width: 80%;
+    }
+
+    .sunrise-conditions, .sunset-conditions {
+        font-size: 1.7rem;
+        margin-left: 0;
+    }
+}
+
