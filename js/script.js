@@ -14,6 +14,7 @@ async function waitingForResponse(name) {
 
 // Conditions //
 function getName(array){
+    // if (document.getElementById("input-ville").value != array.location.name) return alert("Nom de ville inconnu.");
     document.getElementById("city-ttl").innerText = array.location.name;
 }
 
@@ -33,8 +34,16 @@ function getWind(array){
 
 document.getElementById("header-form").addEventListener("submit", function(){
     waitingForResponse(document.getElementById("input-ville").value);
+    addAndReplace()
     waitingForResponseAstronomy(document.getElementById("input-ville").value);
 });
+
+function addAndReplace(){
+    if (document.getElementById("input-ville").value == false) return alert("Nom de ville inconnu.");
+    document.getElementById("input-ttl").classList.replace("displayF", "displayN");
+    document.getElementById("first-content").classList.replace("displayN", "displayG");
+
+}
 
 // Autocomplete //
 
@@ -66,6 +75,7 @@ function getComplete(array){
     array.forEach(cities => {
         table.push(cities.name)
     })
+
 
     for (let i = 0; i < table.length; i++){
         let b = document.createElement("div");
