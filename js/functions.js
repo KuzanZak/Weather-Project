@@ -78,6 +78,9 @@ function createFavorite(fav){
     favoriteLink.addEventListener('click', function(event){
         event.preventDefault();
         waitingForResponse(this.innerText);
+        
+        document.getElementById("input-ttl").classList.replace("displayF", "displayN");
+        document.getElementById("first-content").classList.replace("displayN", "displayG");
     });
 }
 function deleteFavorite(fav){
