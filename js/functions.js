@@ -1,4 +1,4 @@
-const favoritesTAB = [];
+let favoritesTAB = [];
 const favoriteJson = JSON.parse(localStorage.getItem("favorites"));
 if(favoriteJson != null && favoriteJson.length > 0) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
 
@@ -18,7 +18,7 @@ function recupDay(api,town){
 }
 
 // Favorite button's listener
-function listenAddFavorite(){
+function listenFavorite(){
     document.querySelector('.add-favorite').addEventListener('click', function(event){
         event.preventDefault();
         addFavorite(event, document.getElementById('city-ttl'));
@@ -32,19 +32,24 @@ function addFavorite(event, town){
         if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
         const myjson = JSON.parse(localStorage.getItem("favorites"));
 
-        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length > 3){
+        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length >= 4){
             alert("La limite maximum de favoris a été atteinte (4)");
+            return;
+        }
+        if(favoritesTAB.filter(favorite => favorite === fav)){
+            alert('Il y a déjà un favori à ce nom');
             return;
         }
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
         const favoriteJson = localStorage.getItem("favorites");
         favoritesTAB.push(fav);
-         const favoriteTab = JSON.stringify(favoritesTAB);
+        const favoriteTab = JSON.stringify(favoritesTAB);
         localStorage.setItem("favorites", favoriteTab);
 
         createFavorite(fav);
         deleteFavorite();
 }
+
 // Display all favorites
 function displayFavorite(){
     const favoriteJson = localStorage.getItem("favorites");
@@ -57,6 +62,7 @@ function displayFavorite(){
         });
     }
 }
+
 function createFavorite(fav){
     const li = document.createElement('li');
     const favoriteLink = document.createElement("a");
@@ -78,17 +84,18 @@ function createFavorite(fav){
     favoriteLink.addEventListener('click', function(event){
         event.preventDefault();
         waitingForResponse(this.innerText);
-        getSunrise();
-        getSunset();
         document.getElementById("input-ttl").classList.replace("displayF", "displayN");
         document.getElementById("first-content").classList.replace("displayN", "displayG");
+        waitingForResponseAstronomy(this.innerText)
     });
 }
+
 function deleteFavorite(fav){
     document.querySelector('.fa.fa-times').addEventListener('click', function(event){
-        let newTab = favoritesTAB.filter(favorite => favorite !== fav );
-        localStorage.setItem("favorites", JSON.stringify(newTab));
+        let newTab = favoritesTAB.filter(favorite => favorite !== fav);
         removeFavorite(this);
+        favoritesTAB = newTab;
+        localStorage.setItem("favorites", JSON.stringify(newTab));
     });
 }
 
@@ -96,5 +103,5 @@ function removeFavorite(obj){
     obj.parentElement.remove();
 }
 
+
 displayFavorite();
-listenAddFavorite();
