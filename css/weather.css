@@ -8,6 +8,17 @@
     width: 100%;
     height: 3rem;
 }
+.add-favorite{
+    float: right;
+    width: 5rem;
+    height: 2.5rem;
+    background: none;
+    border: none;
+}
+.add-favorite .fa.fa-star{
+    font-size: 2rem;
+    color: yellow;
+}
 .favorite .link-menu{
     display: flex;
     flex-direction: row;
