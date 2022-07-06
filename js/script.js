@@ -47,16 +47,18 @@ function addAndReplace(){
 }
 
 // Autocomplete //
-
+let timer; 
 function autocomplete(inp){
-    setTimeout(() => {
-        inp.addEventListener("input", function(event){
+    inp.addEventListener("input", function(event){
+        clearTimeout(timer); 
+        timer = setTimeout(() => {
             waitingForResponseSearch(document.getElementById("input-ville").value)
-        })
-    }, 660);
+        }, 1000);      
+    });
 };
 
 async function waitingForResponseSearch(name) {
+    if (name.length <= 2) return; 
     const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}`);
     const todoListSearch = await response.json();
     getComplete(todoListSearch)
