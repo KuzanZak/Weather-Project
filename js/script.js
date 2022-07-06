@@ -34,9 +34,10 @@ function getWind(array){
 
 document.getElementById("header-form").addEventListener("submit", function(event){
     event.preventDefault();
-    waitingForResponse(document.getElementById("input-ville").value);
+    const townValue = document.getElementById("input-ville").value;
+    waitingForResponse(townValue);
     addAndReplace()
-    waitingForResponseAstronomy(document.getElementById("input-ville").value);
+    waitingForResponseAstronomy(townValue);
 });
 
 function addAndReplace(){

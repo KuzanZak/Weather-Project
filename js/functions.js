@@ -1,6 +1,6 @@
 const favoritesTAB = [];
 const favoriteJson = JSON.parse(localStorage.getItem("favorites"));
-if(favoriteJson != null) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
+if(favoriteJson != null && favoriteJson.length > 0) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
 
 function recupDay(api,town){
     const contentList = document.querySelector('.weatherTown dl');
@@ -16,21 +16,21 @@ function recupDay(api,town){
     });
     // console.log(api)
 }
+
 // Favorite button's listener
 function listenAddFavorite(){
-    // document.querySelector('.add-favorite').addEventListener('click', function(event){
-    //     event.preventDefault();
-    //     addFavorite(event, document.querySelector('.input-favorite'));
-    // });
+    document.querySelector('.add-favorite').addEventListener('click', function(event){
+        event.preventDefault();
+        addFavorite(event, document.getElementById('city-ttl'));
+    });
 }
 
 // Add favorites on screen
-function addFavorite(event, $this){
+function addFavorite(event, town){
     // Limit is 4 entries
-        const fav = $this.value;
+        const fav = town.innerText.toLowerCase();
+        if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
         const myjson = JSON.parse(localStorage.getItem("favorites"));
-        const ifExists = myjson.filter(favorite => favorite === $this.value )
-        console.log( ifExists );
 
         if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length > 3){
             alert("La limite maximum de favoris a été atteinte (4)");
@@ -39,7 +39,7 @@ function addFavorite(event, $this){
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
         const favoriteJson = localStorage.getItem("favorites");
         favoritesTAB.push(fav);
-        const favoriteTab = JSON.stringify(favoritesTAB);
+         const favoriteTab = JSON.stringify(favoritesTAB);
         localStorage.setItem("favorites", favoriteTab);
 
         createFavorite(fav);
@@ -49,10 +49,11 @@ function addFavorite(event, $this){
 function displayFavorite(){
     const favoriteJson = localStorage.getItem("favorites");
     const favorite = JSON.parse(favoriteJson);
-    if(favorite !== null){
+
+    if(favoritesTAB.length > 0){
         favorite.forEach(function(fav){
             createFavorite(fav);
-            deleteFavorite();
+            deleteFavorite(fav);
         });
     }
 }
@@ -77,12 +78,21 @@ function createFavorite(fav){
     favoriteLink.addEventListener('click', function(event){
         event.preventDefault();
         waitingForResponse(this.innerText);
+        
+        document.getElementById("input-ttl").classList.replace("displayF", "displayN");
+        document.getElementById("first-content").classList.replace("displayN", "displayG");
     });
 }
-function deleteFavorite(){
+function deleteFavorite(fav){
     document.querySelector('.fa.fa-times').addEventListener('click', function(event){
-        console.log('delete favorite'); // En cours...
+        let newTab = favoritesTAB.filter(favorite => favorite !== fav );
+        localStorage.setItem("favorites", JSON.stringify(newTab));
+        removeFavorite(this);
     });
+}
+
+function removeFavorite(obj){
+    obj.parentElement.remove();
 }
 
 displayFavorite();
