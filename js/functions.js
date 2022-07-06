@@ -1,6 +1,6 @@
 const favoritesTAB = [];
 const favoriteJson = JSON.parse(localStorage.getItem("favorites"));
-if(favoriteJson != null) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
+if(favoriteJson != null && favoriteJson.length > 0) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
 
 function recupDay(api,town){
     const contentList = document.querySelector('.weatherTown dl');
@@ -16,22 +16,24 @@ function recupDay(api,town){
     });
     // console.log(api)
 }
+
 // Favorite button's listener
 function listenAddFavorite(){
-    // document.querySelector('.add-favorite').addEventListener('click', function(event){
-    //     event.preventDefault();
-    //     addFavorite(event, document.querySelector('.input-favorite'));
-    // });
+    document.querySelector('.add-favorite').addEventListener('click', function(event){
+        event.preventDefault();
+        addFavorite(event, document.getElementById('city-ttl'));
+    });
 }
 
 // Add favorites on screen
-function addFavorite(event, $this){
+function addFavorite(event, town){
     // Limit is 4 entries
-        const fav = $this.value;
-        const myjson = JSON.parse(localStorage.getItem("favorites"));
-        const ifExists = myjson.filter(favorite => favorite === $this.value )
-        console.log( ifExists );
+        const fav = town.innerText.toLowerCase();
+        
 
+        if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
+        const myjson = JSON.parse(localStorage.getItem("favorites"));
+      
         if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length > 3){
             alert("La limite maximum de favoris a été atteinte (4)");
             return;
@@ -39,6 +41,7 @@ function addFavorite(event, $this){
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
         const favoriteJson = localStorage.getItem("favorites");
         favoritesTAB.push(fav);
+        console.log("add-favorite ==> ",favoritesTAB);
         const favoriteTab = JSON.stringify(favoritesTAB);
         localStorage.setItem("favorites", favoriteTab);
 
@@ -49,7 +52,8 @@ function addFavorite(event, $this){
 function displayFavorite(){
     const favoriteJson = localStorage.getItem("favorites");
     const favorite = JSON.parse(favoriteJson);
-    if(favorite !== null){
+    console.log(favoritesTAB.length)
+    if(favoritesTAB.length > 0){
         favorite.forEach(function(fav){
             createFavorite(fav);
             deleteFavorite();
