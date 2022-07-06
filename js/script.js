@@ -1,11 +1,12 @@
 async function waitingForResponse(name) {
-    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}`);
+    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&aqi=yes`);
     const todoList = await response.json();
     getName(todoList)
     getCountry(todoList)
     getTemp(todoList)
     getCondition(todoList);
     getWind(todoList);
+    displayAirQuality(todoList.current.air_quality);
 
     const responseDay = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
@@ -125,4 +126,10 @@ function getSunrise(array){
 
 function getSunset(array){
     document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");
+}
+
+// AIR QUALITY
+
+function displayAirQuality(aqdata) {
+    console.log(aqdata);
 }
