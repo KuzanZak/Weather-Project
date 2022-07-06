@@ -14,15 +14,6 @@
     font-size: 2rem;
     display: block;
 }
-.add-favorite{
-    float: right;
-    border: none !important;
-    background: none;
-}
-.add-favorite .fa.fa-star{
-    color: yellow !important;
-    font-size: 2rem;
-}
 .favorite .menu{
     grid-column: 3;
     display: none;
@@ -35,6 +26,13 @@
     width: 100vw;
     height: 100vh;
     background: rgb(0,0,0,.7);
+}
+.add-favorite{
+    float: right;
+    width: 5rem;
+    height: 2.5rem;
+    background: none;
+    border: none;
 }
 .favorite .link-menu{
     display: flex;
