@@ -28,7 +28,8 @@ function listenFavorite(){
 // Add favorites on screen
 function addFavorite(event, town){
     // Limit is 4 entries
-        const fav = town.innerText.toLowerCase();
+        let fav = town.innerText.toLowerCase();
+        console.log(fav);
         if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
         const myjson = JSON.parse(localStorage.getItem("favorites"));
 
@@ -36,7 +37,8 @@ function addFavorite(event, town){
             alert("La limite maximum de favoris a été atteinte (4)");
             return;
         }
-        if(favoritesTAB.filter(favorite => favorite === fav)){
+        console.log(favoritesTAB.filter(favorite => favorite === fav))
+        if(favoritesTAB.includes(fav)){
             alert('Il y a déjà un favori à ce nom');
             return;
         }
