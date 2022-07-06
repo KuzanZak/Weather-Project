@@ -15,7 +15,13 @@
     display: block;
 }
 .add-favorite{
-    background: rgb(10, 109, 215);
+    float: right;
+    border: none !important;
+    background: none;
+}
+.add-favorite .fa.fa-star{
+    color: yellow !important;
+    font-size: 2rem;
 }
 .favorite .menu{
     grid-column: 3;
