@@ -90,7 +90,16 @@ function createFavorite(fav){
         waitingForResponse(this.innerText);
         document.getElementById("input-ttl").classList.replace("displayF", "displayN");
         document.getElementById("first-content").classList.replace("displayN", "displayG");
-        waitingForResponseAstronomy(this.innerText)
+        waitingForResponseAstronomy(this.innerText);
+    });
+}
+// Dsiplay or not display menu
+function displayMenu(){
+    document.querySelector('.show-menu').addEventListener('click', function(event){
+        document.querySelector('.menu').classList.add("active");
+    });
+    document.querySelector('.menu').addEventListener('click', function(event){
+        this.classList.remove("active");
     });
 }
 // Delete favorite
@@ -109,4 +118,5 @@ function removeFavorite(obj){
 
 // Call functions
 displayFavorite();
+displayMenu();
 listenFavorite();
