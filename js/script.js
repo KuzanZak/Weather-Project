@@ -32,7 +32,8 @@ function getWind(array){
     document.getElementById("condition-ws").innerText = array.current.wind_kph + " km/h";
 }
 
-document.getElementById("header-form").addEventListener("submit", function(){
+document.getElementById("header-form").addEventListener("submit", function(event){
+    event.preventDefault();
     waitingForResponse(document.getElementById("input-ville").value);
     addAndReplace()
     waitingForResponseAstronomy(document.getElementById("input-ville").value);
