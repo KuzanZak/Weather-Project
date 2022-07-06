@@ -39,11 +39,19 @@ document.getElementById("header-form").addEventListener("submit", function(event
     waitingForResponseAstronomy(document.getElementById("input-ville").value);
 });
 
+function displayFavorites(){
+    document.getElementById("first-content").classList.replace("displayN", "displayG");
+    document.getElementById("input-ttl").classList.replace("displayF", "displayN");   
+}
+
+document.querySelector(".menu").addEventListener("click", function(event){
+    displayFavorites()
+})
+
 function addAndReplace(){
     if (document.getElementById("input-ville").value == false) return alert("Nom de ville inconnu.");
     document.getElementById("input-ttl").classList.replace("displayF", "displayN");
     document.getElementById("first-content").classList.replace("displayN", "displayG");
-
 }
 
 // Autocomplete //
