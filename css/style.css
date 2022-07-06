@@ -62,17 +62,35 @@ body {
     text-align: center;
     border-radius: 2.4rem 0 0 2.4rem;
     width: 25rem;
-    height: 2.5rem;
+    height: 3rem;
 }
 .input-button-ville{
-    width: 3rem;
+    width: 5rem;
     border-radius: 0 2.4rem 2.4rem 0;
     background-image: url(../img/search.png);
     background-repeat: no-repeat;
     background-position: center;
 }
 
-/* AUTOCOMPLETE */
+.input-ttl{
+    /* display: flex; */
+    justify-content: center; 
+    align-items: center;
+    height: 50vh;   
+    text-transform: uppercase;
+    font-size: 4rem;
+    color: rgb(255, 252, 49);
+    text-decoration: underline;
+}
+
+.displayF{
+    display: flex;
+}
+.displayN{
+    display: none;
+}
+
+/* AUTOCOMPLETE */ 
 .autocomplete{
     position: relative;
     display: inline-block;
@@ -122,24 +140,24 @@ body {
         width: 8rem;
     }
     .header-form {
-        height: 4rem;
-    }
-    .input-ville{
-        width: 25.1rem;
         height: 3rem;
+        width: 100%;
     }
-    .input-button-ville{
+    .input-ville, .input-button-ville{
         height: 3rem;
     }
 } 
 
 /* MAIN */
 .first-content{
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+.displayG{
+    display: grid;
 }
 
 .city-ttl{
@@ -179,7 +197,6 @@ body {
 
 @media screen and (min-width: 768px){
     .first-content{
-        display: grid;
         grid-template-columns: 20% 60% 20%;
         text-align: center;
         align-items: center;
@@ -207,6 +224,9 @@ body {
     .conditions-data{
         font-size: 1.7rem;
     }
+    .input-ttl{
+        font-size: 8rem;
+    }
 } 
 
 /* ASTRONOMY */ 
@@ -225,6 +245,7 @@ body {
 .sunrise-conditions, .sunset-conditions{
     font-size: 1.4rem;
 }
+
 sup{
     font-size: .7rem;
 }
@@ -233,17 +254,13 @@ sup{
     .sun-conditions{
         border-left: 1px solid white;
         width: 99%;
-        
     }
-    
     .sun-list{
         width: 100%;
     }
-
     .icon-sunrise, .icon-sunset{
         width: 80%;
     }
-
     .sunrise-conditions, .sunset-conditions {
         font-size: 1.7rem;
         margin-left: 0;

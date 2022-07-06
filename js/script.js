@@ -7,13 +7,14 @@ async function waitingForResponse(name) {
     getCondition(todoList);
     getWind(todoList);
 
-    const responseDay = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
+    const responseDay = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
     recupDay(todoListDay,todoList);
 }
 
-// Conditions //
+// Conditions // 
 function getName(array){
+    // if (document.getElementById("input-ville").value != array.location.name) return alert("Nom de ville inconnu.");
     document.getElementById("city-ttl").innerText = array.location.name;
 }
 
@@ -31,10 +32,19 @@ function getWind(array){
     document.getElementById("condition-ws").innerText = array.current.wind_kph + " km/h";
 }
 
-document.getElementById("header-form").addEventListener("submit", function(){
+document.getElementById("header-form").addEventListener("submit", function(event){
+    event.preventDefault();
     waitingForResponse(document.getElementById("input-ville").value);
+    addAndReplace()
     waitingForResponseAstronomy(document.getElementById("input-ville").value);
 });
+
+function addAndReplace(){
+    if (document.getElementById("input-ville").value == false) return alert("Nom de ville inconnu.");
+    document.getElementById("input-ttl").classList.replace("displayF", "displayN");
+    document.getElementById("first-content").classList.replace("displayN", "displayG");
+
+}
 
 // Autocomplete //
 
@@ -66,6 +76,7 @@ function getComplete(array){
     array.forEach(cities => {
         table.push(cities.name)
     })
+
 
     for (let i = 0; i < table.length; i++){
         let b = document.createElement("div");
