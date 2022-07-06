@@ -2,6 +2,7 @@ let favoritesTAB = [];
 const favoriteJson = JSON.parse(localStorage.getItem("favorites"));
 if(favoriteJson != null && favoriteJson.length > 0) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
 
+// Add week's day on screen
 function recupDay(api,town){
     const contentList = document.querySelector('.weatherTown dl');
     contentList.innerHTML = '';
@@ -42,16 +43,6 @@ function addFavorite(event, town){
 
         if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
         const myjson = JSON.parse(localStorage.getItem("favorites"));
-
-        // if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length === 4){
-        //     alert("La limite maximum de favoris a été atteinte (4)");
-        //     return;
-        // }
-
-        // if(JSON.parse(localStorage.getItem("favorites")).includes(fav)){
-        //     alert('Il y a déjà un favori à ce nom');
-        //     return;
-        // }
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
         const favoriteJson = localStorage.getItem("favorites");
         favoritesTAB.push(fav);
@@ -75,6 +66,7 @@ function displayFavorite(){
     }
 }
 
+// Adding favorite and creating its environment
 function createFavorite(fav){
     const li = document.createElement('li');
     const favoriteLink = document.createElement("a");
@@ -101,7 +93,7 @@ function createFavorite(fav){
         waitingForResponseAstronomy(this.innerText)
     });
 }
-
+// Delete favorite
 function deleteFavorite(fav){
     document.querySelector('.fa.fa-times').addEventListener('click', function(event){
         let newTab = favoritesTAB.filter(favorite => favorite !== fav);
@@ -115,5 +107,6 @@ function removeFavorite(obj){
     obj.parentElement.remove();
 }
 
+// Call functions
 displayFavorite();
 listenFavorite();
