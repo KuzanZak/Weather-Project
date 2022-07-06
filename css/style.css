@@ -237,9 +237,9 @@ body {
         font-size: 8rem;
     }
 
-} 
+}
 
-/* ASTRONOMY */ 
+/* ASTRONOMY */
 .sun-conditions{
     display: grid;
     grid-template-columns: 40% 60%;

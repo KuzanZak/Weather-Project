@@ -29,7 +29,7 @@ function listenFavorite(){
 function addFavorite(event, town){
     // Limit is 4 entries
         let fav = town.innerText.toLowerCase();
-        
+
         if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
         const myjson = JSON.parse(localStorage.getItem("favorites"));
 
@@ -37,7 +37,7 @@ function addFavorite(event, town){
             alert("La limite maximum de favoris a été atteinte (4)");
             return;
         }
-        
+
         if(JSON.parse(localStorage.getItem("favorites")).includes(fav)){
             alert('Il y a déjà un favori à ce nom');
             return;
@@ -104,6 +104,5 @@ function deleteFavorite(fav){
 function removeFavorite(obj){
     obj.parentElement.remove();
 }
-
 
 displayFavorite();
