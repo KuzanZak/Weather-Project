@@ -103,7 +103,7 @@ body {
     border-top: none;
     z-index: 99;
     right: 0;
-    width: 23.8rem;
+    width: 95.5%;
 }
 
 .autocomplete-items div {
@@ -144,6 +144,9 @@ body {
     }
     .input-ville, .input-button-ville{
         height: 3.5rem;
+    }
+    .autocomplete-items{
+        width: 93.5%;
     }
 } 
 
