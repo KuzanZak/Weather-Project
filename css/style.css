@@ -73,7 +73,6 @@ body {
 }
 
 .input-ttl{
-    /* display: flex; */
     justify-content: center; 
     align-items: center;
     height: 50vh;   
@@ -81,6 +80,7 @@ body {
     font-size: 4rem;
     color: rgb(255, 252, 49);
     text-decoration: underline;
+    text-align: center;
 }
 
 .displayF{
