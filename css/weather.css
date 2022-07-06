@@ -14,11 +14,6 @@
     font-size: 2rem;
     display: block;
 }
-.add-favorite{
-    float: right;
-    border: none !important;
-    background: none;
-}
 .favorite .menu{
     grid-column: 3;
     display: none;
