@@ -14,8 +14,6 @@ function recupDay(api,town){
         // Display forecast when submit
         document.querySelector('.weatherPerday').style.display = 'flex';
     });
-    // console.log(api)
-
 }
 
 function listenAddFavorite(){
