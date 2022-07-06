@@ -1,10 +1,10 @@
 :root{
     font-size: 12px;
-
     /* Colors */
-    --primary-color: #4376e7;
+    --primary-color: #b1bace; /* #4376e7 */
     --secondary-color: #ffa73e;
     --background-color: #87BDFF;
+    --color-firstGradient: #b1bace;
     --color-txt: white;
 }
 
@@ -72,10 +72,10 @@ body {
     background-position: center;
 }
 
-/* AUTOCOMPLETE */ 
+/* AUTOCOMPLETE */
 .autocomplete{
     position: relative;
-    display: inline-block; 
+    display: inline-block;
     width: 25rem;
 }
 

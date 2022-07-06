@@ -1,12 +1,34 @@
 /* Favorites */
 .favorite{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 12.5% 20px 1fr;
+    grid-template-rows: 3rem;
     height: auto;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 3rem;
+    height: auto
+}
+.fa.fa-bars{
+    grid-column: 2;
+    font-size: 2rem;
+    display: block;
+}
+.add-favorite{
+    background: rgb(10, 109, 215);
+}
+.favorite .menu{
+    grid-column: 3;
+    display: flex;
+    position: fixed;
+    z-index: 5000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0,0,0,.7);
 }
 .favorite .link-menu{
     display: flex;
@@ -14,47 +36,55 @@
     align-items: center;
     justify-content: center;
     color: var(--color-text);
-    background: rgb(10, 109, 215);
     border-radius: 5px;
-    padding: 0 1rem;
     margin: 0 .5rem;
+    background: none;
+    width: 11rem;
+    height: 35px;
+    font-size: .5rem;
+}
+.favorite .link-menu:not(.link-add-favorite):hover{
+    color: var(--secondary-color);
 }
 .favorite .link-add-favorite{
     background: none;
+    font-size:  1rem;
 }
-.favorite a.fav{
+.favorite .link-menu a.fav{
     text-transform: capitalize;
-    padding: 0 1rem 0 1rem;
+    font-size: 1.2rem;
 }
+
 .favorite a, .favorite i{
     font-size: 1.2rem;
+    padding: 0 .3rem;
+}
+.fa.fa-bars:active  + .menu, .fa.fa-star:active + .menu, .menu:hover{
+    display: flex;
 }
 .favorite ul{
     width: 75%;
-}
-.favorite ul li{
-    width: auto;
-    height: 100%;
 }
 .favorite ul li a{
     text-align: center;
     padding: 2px 5px;
     color: var(--color-text);
-    font-size: 1.5rem;
 }
-.menu{
-    display: inline-flex;
-    justify-content: flex-start;
-}
-.div-input-favorite{
+.li-input-favorite, .li-button-favorite{
     display: none;
     z-index: 900;
-    width: 8%;
-    height: auto;
+    width: 18%;
+    height: 3rem;
 }
 .input-favorite{
+    width: 100%;
     padding: 2px 5px;
     border: solid rgb(123, 154, 219) 1px;
+}
+.input-button-favorite{
+    width: 11rem;
+    height: 1.9rem;
+    color: black;
 }
 /* Forecast 3 days */
 .weatherPerday{
@@ -132,10 +162,44 @@
     grid-column: 2;
 }
 @media screen and (min-width: 768px){
+    .favorite .menu{
+        position: static;
+        z-index: 0;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0;
+        width: 90vh;
+        height: 25px;
+        background: none;
+    }
+    .favorite .link-menu{
+        height: 25px;
+    }
+    .favorite .link-menu:not(.link-add-favorite){
+        background: rgb(10, 109, 215);
+    }
+    .menu li{
+        width: auto;
+        height: 100%;
+    }
+    .fa.fa-bars{
+        display: none;
+    }
+    .add-favorite{
+        background: none;
+    }
+    .input-favorite{
+        width: 70%;
+    }
     .weatherPerday{
         font-size: 2rem;
     }
     .weatherPerday dd img{
         width: 28%;
     }
+}
+@media screen and (max-width:767px){
+
+
 }
