@@ -106,7 +106,7 @@ document.addEventListener("click", function(event){
     closeAllLists(event.target);
 })
 
-// ASTRONOMY // 
+// ASTRONOMY //
 async function waitingForResponseAstronomy(name) {
     const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&dt=2022-07-04`);
     const todoListAstronomy = await response.json();
@@ -119,5 +119,5 @@ function getSunrise(array){
 }
 
 function getSunset(array){
-    document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");}
-
+    document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");
+}
