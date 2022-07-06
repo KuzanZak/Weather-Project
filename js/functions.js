@@ -78,7 +78,8 @@ function createFavorite(fav){
     favoriteLink.addEventListener('click', function(event){
         event.preventDefault();
         waitingForResponse(this.innerText);
-        
+        getSunrise();
+        getSunset();
         document.getElementById("input-ttl").classList.replace("displayF", "displayN");
         document.getElementById("first-content").classList.replace("displayN", "displayG");
     });
