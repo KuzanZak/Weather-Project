@@ -25,7 +25,7 @@
 }
 .favorite .menu{
     grid-column: 3;
-    display: flex;
+    display: none;
     position: fixed;
     z-index: 5000;
     flex-direction: column;
