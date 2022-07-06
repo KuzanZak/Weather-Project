@@ -29,11 +29,9 @@ function listenAddFavorite(){
 function addFavorite(event, town){
     // Limit is 4 entries
         const fav = town.innerText.toLowerCase();
-        
-
         if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
         const myjson = JSON.parse(localStorage.getItem("favorites"));
-      
+
         if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length > 3){
             alert("La limite maximum de favoris a été atteinte (4)");
             return;
@@ -41,8 +39,7 @@ function addFavorite(event, town){
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
         const favoriteJson = localStorage.getItem("favorites");
         favoritesTAB.push(fav);
-        console.log("add-favorite ==> ",favoritesTAB);
-        const favoriteTab = JSON.stringify(favoritesTAB);
+         const favoriteTab = JSON.stringify(favoritesTAB);
         localStorage.setItem("favorites", favoriteTab);
 
         createFavorite(fav);
@@ -52,11 +49,11 @@ function addFavorite(event, town){
 function displayFavorite(){
     const favoriteJson = localStorage.getItem("favorites");
     const favorite = JSON.parse(favoriteJson);
-    console.log(favoritesTAB.length)
+
     if(favoritesTAB.length > 0){
         favorite.forEach(function(fav){
             createFavorite(fav);
-            deleteFavorite();
+            deleteFavorite(fav);
         });
     }
 }
@@ -83,10 +80,16 @@ function createFavorite(fav){
         waitingForResponse(this.innerText);
     });
 }
-function deleteFavorite(){
+function deleteFavorite(fav){
     document.querySelector('.fa.fa-times').addEventListener('click', function(event){
-        console.log('delete favorite'); // En cours...
+        let newTab = favoritesTAB.filter(favorite => favorite !== fav );
+        localStorage.setItem("favorites", JSON.stringify(newTab));
+        removeFavorite(this);
     });
+}
+
+function removeFavorite(obj){
+    obj.parentElement.remove();
 }
 
 displayFavorite();
