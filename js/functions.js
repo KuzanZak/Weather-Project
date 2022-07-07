@@ -19,7 +19,7 @@ function recupDay(api,town){
 }
 
 // Favorite button's listener
-function listenFavorite(){
+function listenAddFavorite(){
     document.querySelector('.add-favorite').addEventListener('click', function(event){
         event.preventDefault();
         let fav = document.getElementById('city-ttl').innerText.toLowerCase();
@@ -40,7 +40,6 @@ function listenFavorite(){
 function addFavorite(event, town){
     // Limit is 4 entries
         let fav = town.innerText.toLowerCase();
-
         if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
         const myjson = JSON.parse(localStorage.getItem("favorites"));
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
@@ -50,7 +49,7 @@ function addFavorite(event, town){
         localStorage.setItem("favorites", favoriteTab);
 
         createFavorite(fav);
-        deleteFavorite();
+        deleteFavorite(fav);
 }
 
 // Display all favorites
@@ -77,6 +76,7 @@ function createFavorite(fav){
     iconDelete.setAttribute("aria-hidden", "true");
 
     li.className = "link-menu";
+    favoriteLink.id = fav.replace(/ /g,""); // Remove spaces in the string
     favoriteLink.className = `fav`;
     favoriteLink.href = `#${fav}`;
     favoriteLink.append(fav);
@@ -85,6 +85,10 @@ function createFavorite(fav){
 
     document.querySelector('.menu').prepend(li);
     // Listen favorite and request
+    listenFavorite(favoriteLink);
+}
+
+function listenFavorite(favoriteLink){
     favoriteLink.addEventListener('click', function(event){
         event.preventDefault();
         waitingForResponse(this.innerText);
@@ -93,6 +97,7 @@ function createFavorite(fav){
         waitingForResponseAstronomy(this.innerText);
     });
 }
+
 // Dsiplay or not display menu
 function displayMenu(){
     document.querySelector('.show-menu').addEventListener('click', function(event){
@@ -119,4 +124,4 @@ function removeFavorite(obj){
 // Call functions
 displayFavorite();
 displayMenu();
-listenFavorite();
+listenAddFavorite();
