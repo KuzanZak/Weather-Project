@@ -3,11 +3,11 @@ const favoriteJson = JSON.parse(localStorage.getItem("favorites"));
 if(favoriteJson != null && favoriteJson.length > 0) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
 
 // Add week's day on screen
-function recupDay(api,town){
+function recupDay(todoListDay){
     const contentList = document.querySelector('.weatherTown dl');
     contentList.innerHTML = '';
 
-    Object.values(api.forecast.forecastday).forEach((daily,index) => {
+    Object.values(todoListDay.forecast.forecastday).forEach((daily,index) => {
         const date = 	new Date(daily.date);
         const days = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"];
         contentList.innerHTML += `<dt class="name-town${index}">${days[date.getDay()]} ${daily.date.split('-')[2]}</dt><dd class="icon-weather${index}"><img src="http:${daily.day.condition.icon}" alt=""></dd><dd class="current-temp${index}">${Math.round(daily.day.avgtemp_c)} °C</dd>`;
@@ -15,11 +15,10 @@ function recupDay(api,town){
         // Display forecast when submit
         document.querySelector('.weatherPerday').style.display = 'flex';
     });
-    // console.log(api)
 }
 
 // Favorite button's listener
-function listenFavorite(){
+function listenAddFavorite(){
     document.querySelector('.add-favorite').addEventListener('click', function(event){
         event.preventDefault();
         let fav = document.getElementById('city-ttl').innerText.toLowerCase();
@@ -40,7 +39,6 @@ function listenFavorite(){
 function addFavorite(event, town){
     // Limit is 4 entries
         let fav = town.innerText.toLowerCase();
-
         if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
         const myjson = JSON.parse(localStorage.getItem("favorites"));
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
@@ -50,7 +48,7 @@ function addFavorite(event, town){
         localStorage.setItem("favorites", favoriteTab);
 
         createFavorite(fav);
-        deleteFavorite();
+        deleteFavorite(fav);
 }
 
 // Display all favorites
@@ -77,6 +75,7 @@ function createFavorite(fav){
     iconDelete.setAttribute("aria-hidden", "true");
 
     li.className = "link-menu";
+    favoriteLink.id = fav.replace(/ /g,""); // Remove spaces in the string
     favoriteLink.className = `fav`;
     favoriteLink.href = `#${fav}`;
     favoriteLink.append(fav);
@@ -85,6 +84,10 @@ function createFavorite(fav){
 
     document.querySelector('.menu').prepend(li);
     // Listen favorite and request
+    listenFavorite(favoriteLink);
+}
+
+function listenFavorite(favoriteLink){
     favoriteLink.addEventListener('click', function(event){
         event.preventDefault();
         waitingForResponse(this.innerText);
@@ -93,6 +96,7 @@ function createFavorite(fav){
         waitingForResponseAstronomy(this.innerText);
     });
 }
+
 // Dsiplay or not display menu
 function displayMenu(){
     document.querySelector('.show-menu').addEventListener('click', function(event){
@@ -119,4 +123,4 @@ function removeFavorite(obj){
 // Call functions
 displayFavorite();
 displayMenu();
-listenFavorite();
+listenAddFavorite();
