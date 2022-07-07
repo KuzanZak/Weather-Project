@@ -205,4 +205,20 @@ if ("geolocation" in navigator) {
 // }
 
 // document.getElementById("find-me").addEventListener('click', geoFindMe())
-  
+
+// AIR QUALITY
+
+function displayAirQuality(api) {
+    airData.forEach(index => {
+        const indexColor = document.getElementById(index.idb)
+        document.getElementById(`${index.id}`).innerText = Math.floor(api[index.keyApi]);
+        indexColor.style.backgroundColor = getAirQualityColor(api[index.keyApi], index.threshold)
+    })
+}
+
+function getAirQualityColor(airQValue, thresholds) {
+    for (let i = 0; i < thresholds.length; i++) {
+        if (airQValue < thresholds[i]) return airColor[i];
+    } 
+    return airColor[airColor.length-1];
+}
