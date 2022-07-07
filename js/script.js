@@ -132,5 +132,11 @@ function getSunset(array){
 // AIR QUALITY
 
 function displayAirQuality(aqdata) {
+    document.getElementById("pm").innerText = Math.floor(aqdata.pm2_5);
+    document.getElementById("pm10").innerText = Math.floor(aqdata.pm10);
+    document.getElementById("no2").innerText = Math.floor(aqdata.no2);
+    document.getElementById("o3").innerText = Math.floor(aqdata.o3);
+    document.getElementById("so2").innerText = Math.floor(aqdata.so2);
+
     console.log(aqdata);
 }
