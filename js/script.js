@@ -126,3 +126,6 @@ function getSunrise(array){
 function getSunset(array){
     document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");
 }
+
+// GEOLOCATION // 
+// jouer la latitude/longitude // 
