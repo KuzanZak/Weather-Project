@@ -1,3 +1,38 @@
+const airColor = ["cyan", "green", "yellow", "orange", "red", "purple"]
+
+const airData = [
+    {
+        id: "pm2_5",
+        keyApi: "pm2_5",
+        threshold: [10, 20, 25, 50, 75],
+        idb: "aq-pm2_5",
+    },
+                    {
+        id: "pm10",
+        keyApi: "pm10",
+        threshold: [20, 40, 50, 100, 150],
+        idb: "aq-pm10",
+    },
+    {
+        id: "no2",
+        keyApi: "no2",
+        threshold: [40, 90, 120, 230, 340],
+        idb: "aq-no2",
+    },
+                    {
+        id: "o3",
+        keyApi: "o3",
+        threshold: [50, 100, 130, 240, 380],
+        idb: "aq-o3",
+    },
+                    {
+        id: "so2",
+        keyApi: "so2",
+        threshold: [100, 200, 350, 500, 750],
+        idb: "aq-so2",
+    }
+];
+
 async function waitingForResponse(name) {
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&aqi=yes`);
     const todoList = await response.json();
@@ -7,6 +42,7 @@ async function waitingForResponse(name) {
     getCondition(todoList);
     getWind(todoList);
     displayAirQuality(todoList.current.air_quality);
+    // testAirQ(todoList);
 
     const responseDay = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
@@ -54,7 +90,7 @@ function autocomplete(inp){
         clearTimeout(timer);
         timer = setTimeout(() => {
             waitingForResponseSearch(document.getElementById("input-ville").value)
-        }, 1000);
+        }, 700);
     });
 };
 
@@ -130,12 +166,20 @@ function getSunset(array){
 
 // AIR QUALITY
 
-function displayAirQuality(aqdata) {
-    document.getElementById("pm").innerText = Math.floor(aqdata.pm2_5);
-    document.getElementById("pm10").innerText = Math.floor(aqdata.pm10);
-    document.getElementById("no2").innerText = Math.floor(aqdata.no2);
-    document.getElementById("o3").innerText = Math.floor(aqdata.o3);
-    document.getElementById("so2").innerText = Math.floor(aqdata.so2);
-
-    console.log(aqdata);
+function displayAirQuality(api) {
+    airData.forEach(index => {
+        const indexColor = document.getElementById(index.idb)
+        document.getElementById(`${index.id}`).innerText = Math.floor(api[index.keyApi]);
+        indexColor.style.backgroundColor = getAirQualityColor(api[index.keyApi], index.threshold)
+    })
 }
+
+function getAirQualityColor(airQValue, thresholds) {
+    for (let i = 0; i < thresholds.length; i++) {
+        if (airQValue < thresholds[i]) return airColor[i];
+    } 
+    return airColor[airColor.length-1];
+}
+    
+
+
