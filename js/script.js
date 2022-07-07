@@ -12,7 +12,7 @@ async function waitingForResponse(name) {
     recupDay(todoListDay,todoList);
 }
 
-// Conditions // 
+// Conditions //
 function getName(array){
     // if (document.getElementById("input-ville").value != array.location.name) return alert("Nom de ville inconnu.");
     document.getElementById("city-ttl").innerText = array.location.name;
@@ -31,7 +31,6 @@ function getCondition(array){
 function getWind(array){
     document.getElementById("condition-ws").innerText = array.current.wind_kph + " km/h";
 }
-
 document.getElementById("header-form").addEventListener("submit", function(event){
     event.preventDefault();
     const townValue = document.getElementById("input-ville").value;
@@ -47,18 +46,18 @@ function addAndReplace(){
 }
 
 // Autocomplete //
-let timer; 
+let timer;
 function autocomplete(inp){
     inp.addEventListener("input", function(event){
-        clearTimeout(timer); 
+        clearTimeout(timer);
         timer = setTimeout(() => {
             waitingForResponseSearch(document.getElementById("input-ville").value)
-        }, 1000);      
+        }, 1000);
     });
 };
 
 async function waitingForResponseSearch(name) {
-    if (name.length <= 2) return; 
+    if (name.length <= 2) return;
     const response = await fetch(`https://api.weatherapi.com/v1/search.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}`);
     const todoListSearch = await response.json();
     getComplete(todoListSearch)
