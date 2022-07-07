@@ -44,6 +44,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-transform: capitalize;
+    font-size: 3rem;
 }
 
 .header-form {
@@ -74,9 +75,10 @@ body {
 
 .input-ttl{
     /* display: flex; */
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    height: 50vh;   
+    text-align: center;
+    height: 50vh;
     text-transform: uppercase;
     font-size: 4rem;
     color: rgb(255, 252, 49);
@@ -90,7 +92,7 @@ body {
     display: none;
 }
 
-/* AUTOCOMPLETE */ 
+/* AUTOCOMPLETE */
 .autocomplete{
     position: relative;
     display: inline-block;
