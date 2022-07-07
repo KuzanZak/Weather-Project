@@ -128,3 +128,44 @@ function getSunset(array){
 
 // GEOLOCATION // 
 // jouer la latitude/longitude // 
+
+if ("geolocation" in navigator) {
+    console.log("geolocation présente")
+} else {
+    console.log("no geolocation");
+}
+
+// navigator.geolocation.getCurrentPosition((position) => {
+//     doSomething(position.coords.latitude, position.coords.longitude)
+// })
+
+// const watchID = navigator.geolocation.watchPosition((position) => {
+//     doSomething(position.coords.latitude, position.coords.longitude)
+// })
+
+// navigator.geolocation.clearWatch(watchID);
+
+
+// function geoFindMe(){
+//     const status = document.getElementById("status")
+
+//     function success(position){
+//         const latitude = position.coords.latitude;
+//         const longitude = position.coords.longitude; 
+
+//         status.textContent = '';
+//     }
+    
+//     function error() {
+//         status.textContent = 'Impossible de retrouver votre localisation'
+//     }
+
+//     if (!navigator.geolocation) {
+//         status.textContent = 'Votre navigateur ne supporte pas la géolocalisation';
+//     } else {
+//         navigator.geolocation.getCurrentPosition(success, error)
+//     }
+// }
+
+// document.getElementById("find-me").addEventListener('click', geoFindMe())
+  
