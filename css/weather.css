@@ -66,7 +66,7 @@
 .favorite i{
     cursor: alias;
 }
-.fa.fa-bars:active  + .menu, .fa.fa-star:active + .menu, .menu:hover{
+.menu.active{
     display: flex;
 }
 .favorite ul{

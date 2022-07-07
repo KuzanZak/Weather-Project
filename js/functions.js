@@ -1,7 +1,8 @@
-const favoritesTAB = [];
+let favoritesTAB = [];
 const favoriteJson = JSON.parse(localStorage.getItem("favorites"));
 if(favoriteJson != null && favoriteJson.length > 0) favoriteJson.forEach(favorite => { favoritesTAB.push(favorite) });
 
+// Add week's day on screen
 function recupDay(api,town){
     const contentList = document.querySelector('.weatherTown dl');
     contentList.innerHTML = '';
@@ -18,9 +19,19 @@ function recupDay(api,town){
 }
 
 // Favorite button's listener
-function listenAddFavorite(){
+function listenFavorite(){
     document.querySelector('.add-favorite').addEventListener('click', function(event){
         event.preventDefault();
+        let fav = document.getElementById('city-ttl').innerText.toLowerCase();
+        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length === 4){
+            alert("La limite maximum de favoris a été atteinte (4)");
+            return;
+        }
+
+        if(JSON.parse(localStorage.getItem("favorites")).includes(fav)){
+            alert('Il y a déjà un favori à ce nom');
+            return;
+        }
         addFavorite(event, document.getElementById('city-ttl'));
     });
 }
@@ -28,23 +39,20 @@ function listenAddFavorite(){
 // Add favorites on screen
 function addFavorite(event, town){
     // Limit is 4 entries
-        const fav = town.innerText.toLowerCase();
+        let fav = town.innerText.toLowerCase();
+
         if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
         const myjson = JSON.parse(localStorage.getItem("favorites"));
-
-        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length > 3){
-            alert("La limite maximum de favoris a été atteinte (4)");
-            return;
-        }
         // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
         const favoriteJson = localStorage.getItem("favorites");
         favoritesTAB.push(fav);
-         const favoriteTab = JSON.stringify(favoritesTAB);
+        const favoriteTab = JSON.stringify(favoritesTAB);
         localStorage.setItem("favorites", favoriteTab);
 
         createFavorite(fav);
         deleteFavorite();
 }
+
 // Display all favorites
 function displayFavorite(){
     const favoriteJson = localStorage.getItem("favorites");
@@ -57,6 +65,8 @@ function displayFavorite(){
         });
     }
 }
+
+// Adding favorite and creating its environment
 function createFavorite(fav){
     const li = document.createElement('li');
     const favoriteLink = document.createElement("a");
@@ -78,16 +88,27 @@ function createFavorite(fav){
     favoriteLink.addEventListener('click', function(event){
         event.preventDefault();
         waitingForResponse(this.innerText);
-        
         document.getElementById("input-ttl").classList.replace("displayF", "displayN");
         document.getElementById("first-content").classList.replace("displayN", "displayG");
+        waitingForResponseAstronomy(this.innerText);
     });
 }
+// Dsiplay or not display menu
+function displayMenu(){
+    document.querySelector('.show-menu').addEventListener('click', function(event){
+        document.querySelector('.menu').classList.add("active");
+    });
+    document.querySelector('.menu').addEventListener('click', function(event){
+        this.classList.remove("active");
+    });
+}
+// Delete favorite
 function deleteFavorite(fav){
     document.querySelector('.fa.fa-times').addEventListener('click', function(event){
-        let newTab = favoritesTAB.filter(favorite => favorite !== fav );
-        localStorage.setItem("favorites", JSON.stringify(newTab));
+        let newTab = favoritesTAB.filter(favorite => favorite !== fav);
         removeFavorite(this);
+        favoritesTAB = newTab;
+        localStorage.setItem("favorites", JSON.stringify(newTab));
     });
 }
 
@@ -95,5 +116,7 @@ function removeFavorite(obj){
     obj.parentElement.remove();
 }
 
+// Call functions
 displayFavorite();
-listenAddFavorite();
+displayMenu();
+listenFavorite();
