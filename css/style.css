@@ -175,6 +175,9 @@ body {
     text-align: center;
     text-transform: uppercase;
     color: var(--color-txt);
+    font-size: 2.5rem;
+    padding-top: 2.5rem;
+    word-break: break-word;
 }
 
 .conditions{
@@ -201,7 +204,7 @@ body {
 
 
 .conditions-data{
-    font-size: 1.4rem;
+    font-size: 2rem;
 }
 
 @media screen and (min-width: 768px){
@@ -231,7 +234,7 @@ body {
         font-size: 1.6rem;
     }
     .conditions-data{
-        font-size: 1.7rem;
+        font-size: 2rem;
     }
     .input-ttl{
         font-size: 8rem;
@@ -253,7 +256,7 @@ body {
 }
 
 .sunrise-conditions, .sunset-conditions{
-    font-size: 1.4rem;
+    font-size: 2rem;
 }
 
 sup{
@@ -272,7 +275,7 @@ sup{
         width: 80%;
     }
     .sunrise-conditions, .sunset-conditions {
-        font-size: 1.7rem;
+        font-size: 2rem;
         margin-left: 0;
     }
 }
