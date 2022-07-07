@@ -307,3 +307,6 @@ table {
   tbody tr td{
     text-align: center;
   }
+  .aq-button{
+    border-radius: 50px;
+  }
