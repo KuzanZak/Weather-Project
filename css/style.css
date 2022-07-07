@@ -74,12 +74,7 @@ body {
 }
 
 .input-ttl{
-<<<<<<< HEAD
     justify-content: center; 
-=======
-    /* display: flex; */
-    justify-content: center;
->>>>>>> 27d351c3608c0a79fd54ce6c3cd2e84562b78c62
     align-items: center;
     text-align: center;
     height: 50vh;   
@@ -153,14 +148,9 @@ body {
         height: 3.5rem;
     }
     .autocomplete-items{
-<<<<<<< HEAD
         width: 93%;
     }
     
-=======
-        width: 93.5%;
-    }
->>>>>>> 27d351c3608c0a79fd54ce6c3cd2e84562b78c62
 } 
 
 /* MAIN */
