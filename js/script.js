@@ -180,6 +180,3 @@ function getAirQualityColor(airQValue, thresholds) {
     } 
     return airColor[airColor.length-1];
 }
-    
-
-
