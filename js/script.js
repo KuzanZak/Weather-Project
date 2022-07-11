@@ -172,49 +172,45 @@ if ("geolocation" in navigator) {
     console.log("no geolocation");
 }
 
-function getPosition(position){
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude; 
-    console.log("Latitude : ", latitude, "Longitude : ", longitude)
-}
-// navigator.geolocation.getCurrentPosition(getPosition);
-
-const watchID = navigator.geolocation.watchPosition(getPosition);
-navigator.geolocation.clearWatch(watchID);
-
-// navigator.geolocation.getCurrentPosition((position) => {
-//     doSomething(position.coords.latitude, position.coords.longitude)
-// })
-
-// const watchID = navigator.geolocation.watchPosition((position) => {
-//     doSomething(position.coords.latitude, position.coords.longitude)
-// })
-
-// navigator.geolocation.clearWatch(watchID);
-
-
-// function geoFindMe(){
-//     const status = document.getElementById("status")
-
-//     function success(position){
-//         const latitude = position.coords.latitude;
-//         const longitude = position.coords.longitude; 
-
-//         status.textContent = '';
-//     }
-    
-//     function error() {
-//         status.textContent = 'Impossible de retrouver votre localisation'
-//     }
-
-//     if (!navigator.geolocation) {
-//         status.textContent = 'Votre navigateur ne supporte pas la géolocalisation';
-//     } else {
-//         navigator.geolocation.getCurrentPosition(success, error)
-//     }
+// function getPosition(position){
+//     const latitude = position.coords.latitude;
+//     const longitude = position.coords.longitude; 
+//     console.log("Latitude : ", latitude, "Longitude : ", longitude)
 // }
 
-// document.getElementById("find-me").addEventListener('click', geoFindMe())
+// navigator.geolocation.getCurrentPosition(getPosition);
+
+// const watchID = navigator.geolocation.watchPosition(getPosition);
+// navigator.geolocation.clearWatch(watchID);
+
+// document.getElementById("find-me").addEventListener("click", function(event) {
+//     console.log("click")
+// })
+
+
+
+function geoFindMe(){
+    const status = document.getElementById("status")
+
+    function getPosition(position){
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude; 
+        console.log("Latitude : ", latitude, "Longitude : ", longitude)
+        status.textContent = '';
+    }
+    
+    function error() {
+        status.textContent = 'Impossible de retrouver votre localisation'
+    }
+
+    if (!navigator.geolocation) {
+        status.textContent = 'Votre navigateur ne supporte pas la géolocalisation';
+    } else {
+        navigator.geolocation.getCurrentPosition(getPosition, error)
+    }
+}
+
+document.getElementById("find-me").addEventListener('click', geoFindMe)
 
 // AIR QUALITY
 
