@@ -21,17 +21,17 @@ function recupDay(todoListDay){
 function listenAddFavorite(){
     document.querySelector('.add-favorite').addEventListener('click', function(event){
         event.preventDefault();
-        let fav = document.getElementById('city-ttl').innerText.toLowerCase();
-        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length === 4){
+        let cityFav = document.getElementById('city-ttl').innerText.toLowerCase();
+
+        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).includes(cityFav)){
+            // alert('Il y a déjà un favori à ce nom');
+            // return;
+        }
+        else if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length === 4){
             alert("La limite maximum de favoris a été atteinte (4)");
             return;
         }
-
-        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).includes(fav)){
-            alert('Il y a déjà un favori à ce nom');
-            return;
-        }
-        addFavorite(event, document.getElementById('city-ttl'));
+        else addFavorite(event, document.getElementById('city-ttl'));
     });
 }
 
@@ -97,9 +97,21 @@ function listenFavorite(favoriteLink){
     });
 }
 function isFavorite(name){
-    console.log("IN FAVORITE==>", name)
-    if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem('favorites')).includes(name))document.querySelector('.add-star').classList.add("is-favorite");
-  
+    const town = name.toLowerCase();
+    if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem('favorites')).includes(town)){
+        document.querySelector('.add-star').classList.add("is-favorite")
+        document.querySelector('.button-favorite').classList.add("remove-favorite");
+        document.querySelector('.button-favorite').classList.remove("add-favorite");
+
+        document.querySelector('.remove-favorite').addEventListener('click', function(event){
+            console.log("ICI on se vautre...PAS ^^")
+        });
+    }
+    else {
+        document.querySelector('.add-star').classList.remove("is-favorite")
+        document.querySelector('.button-favorite').classList.add("add-favorite");
+        document.querySelector('.button-favorite').classList.remove("remove-favorite");
+    }
 }
 
 // Dsiplay or not display menu
@@ -114,15 +126,15 @@ function displayMenu(){
 // Delete favorite
 function deleteFavorite(fav){
     document.querySelector('.fa.fa-times').addEventListener('click', function(event){
-        let newTab = favoritesTAB.filter(favorite => favorite !== fav);
-        removeFavorite(this);
-        favoritesTAB = newTab;
-        localStorage.setItem("favorites", JSON.stringify(newTab));
+        removeFavorite(this, fav);
     });
 }
 
-function removeFavorite(obj){
+function removeFavorite(obj, fav){
+    let newTab = favoritesTAB.filter(favorite => favorite !== fav);
     obj.parentElement.remove();
+    favoritesTAB = newTab;
+    localStorage.setItem("favorites", JSON.stringify(newTab));
 }
 
 // Call functions
