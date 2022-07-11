@@ -34,15 +34,20 @@ const airData = [
 ];
 
 async function waitingForResponse(name) {
+    if(name === "") return; 
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&aqi=yes`);
     const todoList = await response.json();
+    if(response.status != 200) {
+        alert("Ce lieu n'existe pas!"); 
+        return;
+    }; 
+
     getName(todoList)
     getCountry(todoList)
     getTemp(todoList)
     getCondition(todoList);
     getWind(todoList);
     displayAirQuality(todoList.current.air_quality);
-    // testAirQ(todoList);
 
     const responseDay = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
@@ -51,7 +56,6 @@ async function waitingForResponse(name) {
 
 // Conditions //
 function getName(array){
-    // if (document.getElementById("input-ville").value != array.location.name) return alert("Nom de ville inconnu.");
     document.getElementById("city-ttl").innerText = array.location.name;
 }
 
@@ -70,18 +74,11 @@ function getWind(array){
 }
 document.getElementById("header-form").addEventListener("submit", function(event){
     displayWeather(event)
-    // event.preventDefault();
-    // const townValue = document.getElementById("input-ville").value;
-    // waitingForResponse(townValue);
-    // addAndReplace()
-    // waitingForResponseAstronomy(townValue);
 });
 
 function addAndReplace(){
-    if (document.getElementById("input-ville").value == false) return alert("Nom de ville inconnu.");
     document.getElementById("input-ttl").classList.replace("displayF", "displayN");
     document.getElementById("first-content").classList.replace("displayN", "displayG");
-
 }
 
 // Autocomplete //
@@ -154,8 +151,10 @@ document.addEventListener("click", function(event){
 
 // ASTRONOMY //
 async function waitingForResponseAstronomy(name) {
+    if(name === "")return; 
     const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&dt=2022-07-04`);
     const todoListAstronomy = await response.json();
+    if(response.status != 200)return; 
     getSunrise(todoListAstronomy)
     getSunset(todoListAstronomy)
 }
@@ -167,6 +166,46 @@ function getSunrise(array){
 function getSunset(array){
     document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");
 }
+
+// GEOLOCATION // 
+if ("geolocation" in navigator) {
+    console.log("geolocation présente")
+} else {
+    console.log("no geolocation");
+}
+
+let latitude,
+longitude; 
+
+function geoFindMe(){
+    function getPosition(position){
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude; 
+        console.log("Latitude : ", latitude, "Longitude : ", longitude)
+        waitingLocalisation(latitude, longitude)
+        addAndReplace();
+    }
+    
+    function error() {
+        alert('Impossible de retrouver votre localisation')
+    }
+
+    if (!navigator.geolocation) {
+        alert('Votre navigateur ne supporte pas la géolocalisation');
+    } else {
+        navigator.geolocation.getCurrentPosition(getPosition, error)
+    }
+}
+
+async function waitingLocalisation(Lat,lon) {
+    const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${Lat},${lon}&dt=2022-07-04`);
+    const todoListLocalisation = await response.json();
+    waitingForResponse(todoListLocalisation.location.name)
+    getSunrise(todoListLocalisation);
+    getSunset(todoListLocalisation);
+}
+document.getElementById("find-me").addEventListener('click', geoFindMe)
+
 
 // AIR QUALITY
 
@@ -192,3 +231,4 @@ function displayWeather(event) {
     addAndReplace()
     waitingForResponseAstronomy(townValue);
 }
+
