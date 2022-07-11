@@ -50,7 +50,7 @@ async function waitingForResponse(name) {
 
 // Conditions //
 function getName(array){
-    // if (document.getElementById("input-ville").value != array.location.name) return alert("Nom de ville inconnu.");
+    // if (document.getElementById("input-ville").value != array.location.name) alert("Nom de ville inconnu.");
     document.getElementById("city-ttl").innerText = array.location.name;
 }
 
@@ -70,7 +70,6 @@ function getWind(array){
 document.getElementById("header-form").addEventListener("submit", function(event){
     displayWeather(event)
     // event.preventDefault();
-    // const townValue = document.getElementById("input-ville").value;
     // waitingForResponse(townValue);
     // addAndReplace()
     // waitingForResponseAstronomy(townValue);

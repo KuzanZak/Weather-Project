@@ -49,6 +49,7 @@ function addFavorite(event, town){
 
         createFavorite(fav);
         deleteFavorite(fav);
+        isFavorite(fav);
 }
 
 // Display all favorites
@@ -57,6 +58,7 @@ function displayFavorite(){
     const favorite = JSON.parse(favoriteJson);
 
     if(favoritesTAB.length > 0){
+        document.querySelector('.menu').innerHTML = '';
         favorite.forEach(function(fav){
             createFavorite(fav);
             deleteFavorite(fav);
@@ -102,16 +104,22 @@ function isFavorite(name){
         document.querySelector('.add-star').classList.add("is-favorite")
         document.querySelector('.button-favorite').classList.add("remove-favorite");
         document.querySelector('.button-favorite').classList.remove("add-favorite");
-
-        document.querySelector('.remove-favorite').addEventListener('click', function(event){
-            console.log("ICI on se vautre...PAS ^^")
-        });
+        listenIconFavorite(town)
     }
     else {
         document.querySelector('.add-star').classList.remove("is-favorite")
         document.querySelector('.button-favorite').classList.add("add-favorite");
         document.querySelector('.button-favorite').classList.remove("remove-favorite");
     }
+}
+
+function listenIconFavorite(town){
+    document.querySelector('.remove-favorite').addEventListener('click', function(event){
+        this.classList.add("add-favorite");
+        document.querySelector('.button-favorite').classList.remove("remove-favorite");
+        removeOnClickButtonFavorite(this.firstChild,town);
+        displayFavorite();
+    });
 }
 
 // Dsiplay or not display menu
@@ -135,6 +143,12 @@ function removeFavorite(obj, fav){
     obj.parentElement.remove();
     favoritesTAB = newTab;
     localStorage.setItem("favorites", JSON.stringify(newTab));
+}
+function removeOnClickButtonFavorite(firstChild,fav){
+    let newTab = favoritesTAB.filter(favorite => favorite !== fav);
+    favoritesTAB = newTab;
+    localStorage.setItem("favorites", JSON.stringify(newTab));
+    firstChild.classList.remove("is-favorite");
 }
 
 // Call functions
