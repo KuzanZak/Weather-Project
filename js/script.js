@@ -69,6 +69,7 @@ function getWind(array){
 }
 document.getElementById("header-form").addEventListener("submit", function(event){
     displayWeather(event)
+    document.getElementById("input-ville").value = "";
 });
 
 function addAndReplace(){
@@ -124,6 +125,8 @@ function getComplete(array){
         b.addEventListener("click", function(event){
             document.getElementById("input-ville-autocomplete-list").addEventListener("click", function(event){
                 displayWeather(event)
+                document.getElementById("input-ville").value = "";
+
             })
             input.value = this.getElementsByTagName("input")[0].value;
             closeAllLists();
