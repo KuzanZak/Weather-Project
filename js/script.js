@@ -75,13 +75,6 @@ document.getElementById("header-form").addEventListener("submit", function(event
     addAndReplace()
     waitingForResponseAstronomy(townValue);
 });
-document.querySelectorAll(".input-auto-complete").addEventListener("click", function(event){
-    event.preventDefault();
-    const townValue = document.getElementById("input-ville").value;
-    waitingForResponse(townValue);
-    addAndReplace()
-    waitingForResponseAstronomy(townValue);
-})
 
 function addAndReplace(){
     if (document.getElementById("input-ville").value == false) return alert("Nom de ville inconnu.");
@@ -97,7 +90,7 @@ function autocomplete(inp){
         clearTimeout(timer);
         timer = setTimeout(() => {
             waitingForResponseSearch(document.getElementById("input-ville").value)
-        }, 700);
+        }, 500);
     });
 };
 
@@ -134,6 +127,13 @@ function getComplete(array){
         b.innerHTML += `<input id="${i}" class="input-hidden" type="hidden" value="${table[i]}">`;
 
         b.addEventListener("click", function(event){
+            document.getElementById("input-ville-autocomplete-list").addEventListener("click", function(event){
+                event.preventDefault();
+                const townValue = document.getElementById("input-ville").value;
+                waitingForResponse(townValue);
+                addAndReplace()
+                waitingForResponseAstronomy(townValue);
+            })
             input.value = this.getElementsByTagName("input")[0].value;
             closeAllLists();
         });

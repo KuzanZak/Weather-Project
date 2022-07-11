@@ -84,6 +84,10 @@ body {
     color: rgb(255, 252, 49);
     text-decoration: underline;
 }
+.color{
+    color: rgb(235, 18, 18);
+    font-size: 5rem;
+}
 
 .displayF{
     display: flex;
@@ -96,7 +100,9 @@ body {
 .autocomplete{
     position: relative;
     display: inline-block;
+    color: black;
 }
+
 
 .autocomplete-items{
     position: absolute;
