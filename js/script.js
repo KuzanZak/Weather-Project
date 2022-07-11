@@ -191,30 +191,37 @@ if ("geolocation" in navigator) {
 //     console.log("click")
 // })
 
-
+let latitude,
+longitude; 
 
 function geoFindMe(){
-    const status = document.getElementById("status")
-
     function getPosition(position){
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude; 
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude; 
         console.log("Latitude : ", latitude, "Longitude : ", longitude)
-        status.textContent = '';
+        waitingLocalisation(latitude, longitude)
     }
     
     function error() {
-        status.textContent = 'Impossible de retrouver votre localisation'
+        alert('Impossible de retrouver votre localisation')
     }
 
     if (!navigator.geolocation) {
-        status.textContent = 'Votre navigateur ne supporte pas la géolocalisation';
+        alert('Votre navigateur ne supporte pas la géolocalisation');
     } else {
         navigator.geolocation.getCurrentPosition(getPosition, error)
     }
 }
 
+async function waitingLocalisation(Lat,lon) {
+    const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${Lat},${lon}&dt=2022-07-04`);
+    const todoListLocalisation = await response.json();
+    waitingForResponse(todoListLocalisation.location.name)
+    getSunrise(todoListLocalisation);
+    getSunset(todoListLocalisation);
+}
 document.getElementById("find-me").addEventListener('click', geoFindMe)
+
 
 // AIR QUALITY
 
@@ -240,3 +247,4 @@ function displayWeather(event) {
     addAndReplace()
     waitingForResponseAstronomy(townValue);
 }
+
