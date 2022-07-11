@@ -75,6 +75,13 @@ document.getElementById("header-form").addEventListener("submit", function(event
     addAndReplace()
     waitingForResponseAstronomy(townValue);
 });
+document.querySelectorAll(".input-auto-complete").addEventListener("click", function(event){
+    event.preventDefault();
+    const townValue = document.getElementById("input-ville").value;
+    waitingForResponse(townValue);
+    addAndReplace()
+    waitingForResponseAstronomy(townValue);
+})
 
 function addAndReplace(){
     if (document.getElementById("input-ville").value == false) return alert("Nom de ville inconnu.");
