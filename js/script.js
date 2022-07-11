@@ -41,7 +41,7 @@ async function waitingForResponse(name) {
     getTemp(todoList)
     getCondition(todoList);
     getWind(todoList);
-    isFavorite(name);
+    // isFavorite(name);
 
     const responseDay = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
@@ -76,10 +76,9 @@ document.getElementById("header-form").addEventListener("submit", function(event
 });
 
 function addAndReplace(){
-    if (document.getElementById("input-ville").value == false) return alert("Nom de ville inconnu.");
+    if (document.getElementById("input-ville").value == false) alert("Nom de ville inconnu.");
     document.getElementById("input-ttl").classList.replace("displayF", "displayN");
     document.getElementById("first-content").classList.replace("displayN", "displayG");
-
 }
 
 // Autocomplete //

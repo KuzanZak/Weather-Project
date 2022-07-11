@@ -31,7 +31,7 @@ function listenAddFavorite(){
             alert("La limite maximum de favoris a été atteinte (4)");
             return;
         }
-        else addFavorite(event, document.getElementById('city-ttl'));
+        addFavorite(event, document.getElementById('city-ttl'));
     });
 }
 
@@ -106,10 +106,11 @@ function isFavorite(name){
         document.querySelector('.button-favorite').classList.remove("add-favorite");
         listenIconFavorite(town)
     }
-    else {
+    if(localStorage.getItem("favorites") != null && !JSON.parse(localStorage.getItem('favorites')).includes(town)) {
         document.querySelector('.add-star').classList.remove("is-favorite")
         document.querySelector('.button-favorite').classList.add("add-favorite");
         document.querySelector('.button-favorite').classList.remove("remove-favorite");
+        
     }
 }
 
