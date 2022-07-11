@@ -42,7 +42,6 @@ async function waitingForResponse(name) {
     getCondition(todoList);
     getWind(todoList);
     displayAirQuality(todoList.current.air_quality);
-    // testAirQ(todoList);
 
     const responseDay = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
@@ -70,11 +69,6 @@ function getWind(array){
 }
 document.getElementById("header-form").addEventListener("submit", function(event){
     displayWeather(event)
-    // event.preventDefault();
-    // const townValue = document.getElementById("input-ville").value;
-    // waitingForResponse(townValue);
-    // addAndReplace()
-    // waitingForResponseAstronomy(townValue);
 });
 
 function addAndReplace(){
@@ -117,7 +111,7 @@ function getComplete(array){
     div.append(a)
 
     array.forEach(cities => {
-        table.push(cities.name)
+        table.push(`${cities.name}, ${cities.country}`)
     })
 
 
