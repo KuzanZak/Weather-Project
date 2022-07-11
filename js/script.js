@@ -172,6 +172,16 @@ if ("geolocation" in navigator) {
     console.log("no geolocation");
 }
 
+function getPosition(position){
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude; 
+    console.log("Latitude : ", latitude, "Longitude : ", longitude)
+}
+// navigator.geolocation.getCurrentPosition(getPosition);
+
+const watchID = navigator.geolocation.watchPosition(getPosition);
+navigator.geolocation.clearWatch(watchID);
+
 // navigator.geolocation.getCurrentPosition((position) => {
 //     doSomething(position.coords.latitude, position.coords.longitude)
 // })
