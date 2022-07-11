@@ -69,11 +69,12 @@ function getWind(array){
     document.getElementById("condition-ws").innerText = array.current.wind_kph + " km/h";
 }
 document.getElementById("header-form").addEventListener("submit", function(event){
-    event.preventDefault();
-    const townValue = document.getElementById("input-ville").value;
-    waitingForResponse(townValue);
-    addAndReplace()
-    waitingForResponseAstronomy(townValue);
+    displayWeather(event)
+    // event.preventDefault();
+    // const townValue = document.getElementById("input-ville").value;
+    // waitingForResponse(townValue);
+    // addAndReplace()
+    // waitingForResponseAstronomy(townValue);
 });
 
 function addAndReplace(){
@@ -89,7 +90,7 @@ function autocomplete(inp){
         clearTimeout(timer);
         timer = setTimeout(() => {
             waitingForResponseSearch(document.getElementById("input-ville").value)
-        }, 700);
+        }, 500);
     });
 };
 
@@ -126,6 +127,9 @@ function getComplete(array){
         b.innerHTML += `<input id="${i}" class="input-hidden" type="hidden" value="${table[i]}">`;
 
         b.addEventListener("click", function(event){
+            document.getElementById("input-ville-autocomplete-list").addEventListener("click", function(event){
+                displayWeather(event)
+            })
             input.value = this.getElementsByTagName("input")[0].value;
             closeAllLists();
         });
@@ -227,4 +231,12 @@ function getAirQualityColor(airQValue, thresholds) {
         if (airQValue < thresholds[i]) return airColor[i];
     } 
     return airColor[airColor.length-1];
+}
+
+function displayWeather(event) {
+    event.preventDefault()
+    const townValue = document.getElementById("input-ville").value;
+    waitingForResponse(townValue);
+    addAndReplace()
+    waitingForResponseAstronomy(townValue);
 }

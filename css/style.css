@@ -13,7 +13,7 @@ body {
     background-image: url(../img/cloud3.mini.jpg);
     background-repeat: no-repeat;
     /* background-size: cover; */
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 /* HEADER  */
@@ -84,6 +84,10 @@ body {
     text-decoration: underline;
     text-align: center;
 }
+.color{
+    color: rgb(235, 18, 18);
+    font-size: 5rem;
+}
 
 .displayF{
     display: flex;
@@ -96,7 +100,9 @@ body {
 .autocomplete{
     position: relative;
     display: inline-block;
+    color: black;
 }
+
 
 .autocomplete-items{
     position: absolute;
