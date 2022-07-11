@@ -59,13 +59,15 @@
     text-transform: capitalize;
     font-size: 3rem;
 }
-
 .favorite i{
     font-size: 2rem;
     padding: 0 .3rem;
 }
 .favorite i{
     cursor: alias;
+}
+.is-favorite{
+    color: rgb(208, 210, 214);
 }
 .menu.active{
     display: flex;

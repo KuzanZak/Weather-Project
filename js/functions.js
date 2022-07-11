@@ -27,7 +27,7 @@ function listenAddFavorite(){
             return;
         }
 
-        if(JSON.parse(localStorage.getItem("favorites")).includes(fav)){
+        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).includes(fav)){
             alert('Il y a déjà un favori à ce nom');
             return;
         }
@@ -95,6 +95,11 @@ function listenFavorite(favoriteLink){
         document.getElementById("first-content").classList.replace("displayN", "displayG");
         waitingForResponseAstronomy(this.innerText);
     });
+}
+function isFavorite(name){
+    console.log("IN FAVORITE==>", name)
+    if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem('favorites')).includes(name))document.querySelector('.add-star').classList.add("is-favorite");
+  
 }
 
 // Dsiplay or not display menu

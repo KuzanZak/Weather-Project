@@ -10,6 +10,7 @@ async function waitingForResponse(name) {
     const responseDay = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
     recupDay(todoListDay);
+    isFavorite(name)
 }
 
 // Conditions //
