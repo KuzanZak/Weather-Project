@@ -259,4 +259,3 @@ function getAirQuality(airQValue, thresholds) {
     } 
     return airQuality[airQuality.length-1];
 }
-
