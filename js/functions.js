@@ -27,7 +27,7 @@ function listenAddFavorite(){
             return;
         }
 
-        if(JSON.parse(localStorage.getItem("favorites")).includes(fav)){
+        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).includes(fav)){
             alert('Il y a déjà un favori à ce nom');
             return;
         }
