@@ -40,7 +40,7 @@ async function waitingForResponse(name) {
     if(response.status != 200) {
         alert("Ce lieu n'existe pas!");
         return;
-    };
+    }
 
     getName(todoList)
     getCountry(todoList)
@@ -48,6 +48,7 @@ async function waitingForResponse(name) {
     getCondition(todoList);
     getWind(todoList);
     displayAirQuality(todoList.current.air_quality);
+    isFavorite(name);
 
     const responseDay = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
@@ -151,10 +152,10 @@ document.addEventListener("click", function(event){
 
 // ASTRONOMY //
 async function waitingForResponseAstronomy(name) {
-    if(name === "")return; 
+    if(name === "")return;
     const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&dt=2022-07-04`);
     const todoListAstronomy = await response.json();
-    if(response.status != 200)return; 
+    if(response.status != 200)return;
     getSunrise(todoListAstronomy)
     getSunset(todoListAstronomy)
 }
@@ -167,25 +168,24 @@ function getSunset(array){
     document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");
 }
 
-// GEOLOCATION // 
+// GEOLOCATION //
 if ("geolocation" in navigator) {
     console.log("geolocation présente")
 } else {
     console.log("no geolocation");
 }
 
-let latitude,
-longitude; 
+let latitude,longitude;
 
 function geoFindMe(){
     function getPosition(position){
         latitude = position.coords.latitude;
-        longitude = position.coords.longitude; 
+        longitude = position.coords.longitude;
         console.log("Latitude : ", latitude, "Longitude : ", longitude)
         waitingLocalisation(latitude, longitude)
         addAndReplace();
     }
-    
+
     function error() {
         alert('Impossible de retrouver votre localisation')
     }
@@ -220,7 +220,7 @@ function displayAirQuality(api) {
 function getAirQualityColor(airQValue, thresholds) {
     for (let i = 0; i < thresholds.length; i++) {
         if (airQValue < thresholds[i]) return airColor[i];
-    } 
+    }
     return airColor[airColor.length-1];
 }
 
@@ -231,4 +231,3 @@ function displayWeather(event) {
     addAndReplace()
     waitingForResponseAstronomy(townValue);
 }
-

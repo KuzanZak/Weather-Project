@@ -19,46 +19,48 @@ function recupDay(todoListDay){
 
 // Favorite button's listener
 function listenAddFavorite(){
-    document.querySelector('.add-favorite').addEventListener('click', function(event){
+    document.querySelector('#add-favorite').addEventListener('click', function(event){
         event.preventDefault();
         let cityFav = document.getElementById('city-ttl').innerText.toLowerCase();
 
-        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).includes(cityFav)){
-            // alert('Il y a déjà un favori à ce nom');
-            // return;
+        if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).includes(cityFav))
+        {
+            console.log(this);
+            removeOnClickButtonFavorite(this.firstChild,cityFav);
+            displayFavorite();
         }
         else if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length === 4){
             alert("La limite maximum de favoris a été atteinte (4)");
             return;
         }
-        addFavorite(event, document.getElementById('city-ttl'));
+        else addFavorite(event, document.getElementById('city-ttl'));
     });
 }
 
 // Add favorites on screen
 function addFavorite(event, town){
     // Limit is 4 entries
-        let fav = town.innerText.toLowerCase();
-        if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
-        const myjson = JSON.parse(localStorage.getItem("favorites"));
-        // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
-        const favoriteJson = localStorage.getItem("favorites");
-        favoritesTAB.push(fav);
-        const favoriteTab = JSON.stringify(favoritesTAB);
-        localStorage.setItem("favorites", favoriteTab);
+    let fav = town.innerText.toLowerCase();
+    if(!localStorage.getItem("favorites")) localStorage.setItem("favorites", JSON.stringify("[]"));
+    const myjson = JSON.parse(localStorage.getItem("favorites"));
+    // Vérifie si favorite-town existe alors concat avec le précédent existant sinon création
+    const favoriteJson = localStorage.getItem("favorites");
+    favoritesTAB.push(fav);
+    const favoriteTab = JSON.stringify(favoritesTAB);
+    localStorage.setItem("favorites", favoriteTab);
 
-        createFavorite(fav);
-        deleteFavorite(fav);
-        isFavorite(fav);
+    createFavorite(fav);
+    deleteFavorite(fav);
+    isFavorite(fav);
 }
 
 // Display all favorites
 function displayFavorite(){
     const favoriteJson = localStorage.getItem("favorites");
     const favorite = JSON.parse(favoriteJson);
+    document.querySelector('.menu').innerHTML = '';
 
     if(favoritesTAB.length > 0){
-        document.querySelector('.menu').innerHTML = '';
         favorite.forEach(function(fav){
             createFavorite(fav);
             deleteFavorite(fav);
@@ -101,26 +103,11 @@ function listenFavorite(favoriteLink){
 function isFavorite(name){
     const town = name.toLowerCase();
     if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem('favorites')).includes(town)){
-        document.querySelector('.add-star').classList.add("is-favorite")
-        document.querySelector('.button-favorite').classList.add("remove-favorite");
-        document.querySelector('.button-favorite').classList.remove("add-favorite");
-        listenIconFavorite(town)
+        document.querySelector('.add-star').classList.add("is-favorite");
     }
-    if(localStorage.getItem("favorites") != null && !JSON.parse(localStorage.getItem('favorites')).includes(town)) {
-        document.querySelector('.add-star').classList.remove("is-favorite")
-        document.querySelector('.button-favorite').classList.add("add-favorite");
-        document.querySelector('.button-favorite').classList.remove("remove-favorite");
-        
+    else{
+        document.querySelector('.add-star').classList.remove("is-favorite");
     }
-}
-
-function listenIconFavorite(town){
-    document.querySelector('.remove-favorite').addEventListener('click', function(event){
-        this.classList.add("add-favorite");
-        document.querySelector('.button-favorite').classList.remove("remove-favorite");
-        removeOnClickButtonFavorite(this.firstChild,town);
-        displayFavorite();
-    });
 }
 
 // Dsiplay or not display menu
