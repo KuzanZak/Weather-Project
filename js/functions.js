@@ -25,7 +25,6 @@ function listenAddFavorite(){
 
         if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).includes(cityFav))
         {
-            console.log(this);
             removeOnClickButtonFavorite(this.firstChild,cityFav);
             displayFavorite();
         }
