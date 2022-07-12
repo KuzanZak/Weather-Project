@@ -28,7 +28,7 @@
     height: 100vh;
     background: rgb(0,0,0,.7);
 }
-.add-favorite, .remove-favorite{
+.add-favorite{
     float: right;
     width: 5rem;
     height: 2.5rem;
@@ -68,7 +68,7 @@
     cursor: alias;
 }
 .is-favorite{
-    color: rgb(208, 210, 214);
+    color: yellow;
 }
 .menu.active{
     display: flex;
