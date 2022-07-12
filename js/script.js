@@ -41,13 +41,13 @@ const airData = [
 ];
 
 async function waitingForResponse(name) {
-    if(name === "") return; 
+    if(name === "") return;
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&aqi=yes`);
     const todoList = await response.json();
     if(response.status != 200) {
-        alert("Ce lieu n'existe pas!"); 
+        alert("Ce lieu n'existe pas!");
         return;
-    }; 
+    }
 
     getIcon(todoList)
     getName(todoList)
@@ -56,6 +56,7 @@ async function waitingForResponse(name) {
     getCondition(todoList);
     getWind(todoList);
     displayAirQuality(todoList.current.air_quality);
+    isFavorite(name);
 
     const responseDay = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&days=3&aqi=no&alert=no`);
     const todoListDay = await responseDay.json();
@@ -202,13 +203,12 @@ if ("geolocation" in navigator) {
     console.log("no geolocation");
 }
 
-let latitude,
-longitude; 
+let latitude,longitude;
 
 function geoFindMe(){
     function getPosition(position){
         latitude = position.coords.latitude;
-        longitude = position.coords.longitude; 
+        longitude = position.coords.longitude;
         console.log("Latitude : ", latitude, "Longitude : ", longitude)
         waitingLocalisation(latitude, longitude)
         addAndReplace();
@@ -250,13 +250,13 @@ function displayAirQuality(api) {
 function getAirQualityColor(airQValue, thresholds) {
     for (let i = 0; i < thresholds.length; i++) {
         if (airQValue < thresholds[i]) return airColor[i];
-    } 
+    }
     return airColor[airColor.length-1];
 }
+
 function getAirQuality(airQValue, thresholds) {
     for (let i = 0; i < thresholds.length; i++) {
         if (airQValue < thresholds[i]) return airQuality[i];
     } 
     return airQuality[airQuality.length-1];
 }
-

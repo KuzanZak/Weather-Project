@@ -34,6 +34,7 @@
     height: 2.5rem;
     background: none;
     border: none;
+    font-size: 2rem;
 }
 .favorite .link-menu{
     display: flex;
@@ -59,13 +60,15 @@
     text-transform: capitalize;
     font-size: 3rem;
 }
-
 .favorite i{
     font-size: 2rem;
     padding: 0 .3rem;
 }
 .favorite i{
     cursor: alias;
+}
+.is-favorite{
+    color: yellow;
 }
 .menu.active{
     display: flex;
@@ -189,7 +192,7 @@
     .favorite .link-menu a.fav{
         font-size: 1.2rem;
     }
-    .favorite .link-menu:not(.link-add-favorite){
+    .favorite .link-menu:not(.link-add-favorite), .favorite .link-menu:not(.link-remove-favorite){
         background: rgb(10, 109, 215);
     }
     .menu li{
@@ -202,7 +205,7 @@
     .favorite i{
         font-size: 1.5rem;
     }
-    .add-favorite{
+    .add-favorite, .remove-favorite{
         background: none;
     }
     .input-favorite{
