@@ -247,6 +247,9 @@ body {
         width: 75%;
         margin: 2rem auto;
     }    
+    .city-ttl{
+        font-size: 2.5rem;
+    }
     .country-ttl{
         font-size: 2rem;
     }
@@ -256,6 +259,7 @@ body {
     .conditions{
         font-size: 1.8rem;
         border-left: 1px solid white;
+        border-right: 1px solid white;
         margin: 0 auto;
     }
     .list{
@@ -297,7 +301,6 @@ sup{
 
 @media screen and (min-width: 768px) {
     .sun-conditions{
-        border-left: 1px solid white;
         width: 99%;
     }
     .sun-list{
