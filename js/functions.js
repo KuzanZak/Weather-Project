@@ -31,7 +31,6 @@ function listenAddFavorite(){
         }
         else if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length === 4){
             alert("La limite maximum de favoris a été atteinte (4)");
-            return;
         }
         else addFavorite(event, document.getElementById('city-ttl'));
     });
