@@ -232,7 +232,7 @@ body {
 }
 
 .icon-th, .icon-ws, .icon-c {
-    width: 30%;
+    width: 20%;
 }
 
 .conditions-data{
@@ -265,6 +265,9 @@ body {
     .button-localisation-ttl{
         top: 1%;
         right: 13%;
+    }
+    .icon-th, .icon-ws, .icon-c {
+        width: 25%;
     }
 
 }
