@@ -86,23 +86,20 @@ async function waitingForResponse(name) {
 function modifyBackground(codeApi){
     if (conditions.sunny.code.includes(codeApi)) {
         document.body.style.background = `url(../img/sunny.jpg) no-repeat 70%`;
-        document.body.style.backgroundSize = `1920px 1280px`;
     }
     else if (conditions.cloudy.code.includes(codeApi)) {
         document.body.style.background = `url(../img/cloud3.jpg) no-repeat 70%`;
-        document.body.style.backgroundSize = `1920px 1280px`;
     }
     else if (conditions.rainy.code.includes(codeApi)) {
         document.body.style.background = `url(../img/rainy.jpg) no-repeat 70%`;
-        document.body.style.backgroundSize = `1920px 1280px`;
     }
     else if (conditions.thundery.code.includes(codeApi)) {
         document.body.style.background = `url(../img/thundery.jpg) no-repeat 70%`;
-        document.body.style.backgroundSize = `1920px 1280px`;
     }
     else {
-        document.body.style.background = `blue`;
+        document.body.style.background = `lightseagreen`;
     }
+    document.body.style.backgroundSize = `1920px 1280px`;
 }
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
