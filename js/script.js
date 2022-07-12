@@ -1,4 +1,6 @@
-const airColor = ["cyan", "green", "yellow", "orange", "red", "purple"]
+const airColor = ["darkturquoise", "green", "yellow", "orange", "red", "purple"];
+
+const airQuality = ["Bon", "Moyen", "Dégradé", "Mauvais", "Très Mauvais", "Ext Mauvais"];
 
 const airData = [
     {
@@ -6,30 +8,35 @@ const airData = [
         keyApi: "pm2_5",
         threshold: [10, 20, 25, 50, 75],
         idb: "aq-pm2_5",
+        idq: "aql-pm2_5"
     },
                     {
         id: "pm10",
         keyApi: "pm10",
         threshold: [20, 40, 50, 100, 150],
         idb: "aq-pm10",
+        idq: "aql-pm10"
     },
     {
         id: "no2",
         keyApi: "no2",
         threshold: [40, 90, 120, 230, 340],
         idb: "aq-no2",
+        idq: "aql-no2"
     },
                     {
         id: "o3",
         keyApi: "o3",
         threshold: [50, 100, 130, 240, 380],
         idb: "aq-o3",
+        idq: "aql-o3"
     },
                     {
         id: "so2",
         keyApi: "so2",
         threshold: [100, 200, 350, 500, 750],
         idb: "aq-so2",
+        idq: "aql-so2"
     }
 ];
 
@@ -82,6 +89,7 @@ function getWind(array){
 
 document.getElementById("header-form").addEventListener("submit", function(event){
     displayWeather(event)
+    document.getElementById("input-ville").value = "";
 });
 
 function addAndReplace(){
@@ -151,7 +159,7 @@ function getComplete(array){
     div.append(a)
 
     array.forEach(cities => {
-        table.push(cities.name)
+        table.push(`${cities.name}, ${cities.country}`)
     })
 
 
@@ -164,6 +172,8 @@ function getComplete(array){
         b.addEventListener("click", function(event){
             document.getElementById("input-ville-autocomplete-list").addEventListener("click", function(event){
                 displayWeather(event)
+                document.getElementById("input-ville").value = "";
+
             })
             input.value = this.getElementsByTagName("input")[0].value;
             closeAllLists();
@@ -230,8 +240,10 @@ document.getElementById("find-me").addEventListener('click', geoFindMe)
 function displayAirQuality(api) {
     airData.forEach(index => {
         const indexColor = document.getElementById(index.idb)
+        const indexQual = document.getElementById(index.idq)
         document.getElementById(`${index.id}`).innerText = Math.floor(api[index.keyApi]);
         indexColor.style.backgroundColor = getAirQualityColor(api[index.keyApi], index.threshold)
+        indexQual.innerText = getAirQuality(api[index.keyApi], index.threshold)
     })
 }
 
@@ -240,5 +252,11 @@ function getAirQualityColor(airQValue, thresholds) {
         if (airQValue < thresholds[i]) return airColor[i];
     } 
     return airColor[airColor.length-1];
+}
+function getAirQuality(airQValue, thresholds) {
+    for (let i = 0; i < thresholds.length; i++) {
+        if (airQValue < thresholds[i]) return airQuality[i];
+    } 
+    return airQuality[airQuality.length-1];
 }
 
