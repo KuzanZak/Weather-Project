@@ -2,6 +2,24 @@ const airColor = ["darkturquoise", "green", "yellow", "orange", "red", "purple"]
 
 const airQuality = ["Bon", "Moyen", "Dégradé", "Mauvais", "Très Mauvais", "Ext Mauvais"];
 
+const conditions = {
+    sunny: {
+        code: [1000]
+    },
+    cloudy: {
+        code: [1003, 1006, 1009, 1030, 1135, 1147]
+    },
+    rainy: {
+        code: [1063, 1150, 1153, 1180, 1183, 1186, 1189, 1192, 1195, 1240, 1243, 1246]
+    },
+    thundery: {
+        code: [1087, 1273, 1276, 1279, 1282 ]
+    },
+    snowy: {
+        code: [1066, 1069, 1072, 1114, 1117, 1168, 1171, 1198, 1201, 1204, 1207, 1210, 1213, 1216, 1219, 1222, 1225, 1237, 1249, 1252, 1255, 1258, 1261, 1264]
+    }
+};
+
 const airData = [
     {
         id: "pm2_5",
@@ -64,12 +82,35 @@ async function waitingForResponse(name) {
 }
 
 // Conditions //
+
+function modifyBackground(codeApi){
+    if (conditions.sunny.code.includes(codeApi)) {
+        document.body.style.background = `url(../img/sunny.jpg) no-repeat 70%`;
+        document.body.style.backgroundSize = `1920px 1280px`;
+    }
+    else if (conditions.cloudy.code.includes(codeApi)) {
+        document.body.style.background = `url(../img/cloud3.jpg) no-repeat 70%`;
+        document.body.style.backgroundSize = `1920px 1280px`;
+    }
+    else if (conditions.rainy.code.includes(codeApi)) {
+        document.body.style.background = `url(../img/rainy.jpg) no-repeat 70%`;
+        document.body.style.backgroundSize = `1920px 1280px`;
+    }
+    else if (conditions.thundery.code.includes(codeApi)) {
+        document.body.style.background = `url(../img/thundery.jpg) no-repeat 70%`;
+        document.body.style.backgroundSize = `1920px 1280px`;
+    }
+    else {
+        document.body.style.background = `blue`;
+    }
+}
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
 }
 
 function getIcon(array){
     document.getElementById("list-cd").innerHTML = `<img class="icon-c" src="${array.current.condition.icon}" alt="weather condition">`;
+    modifyBackground(array.current.condition.code)
 }
 
 function getCountry(array){
