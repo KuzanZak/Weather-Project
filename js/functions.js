@@ -25,15 +25,19 @@ function listenAddFavorite(){
 
         if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).includes(cityFav))
         {
-            console.log(this);
             removeOnClickButtonFavorite(this.firstChild,cityFav);
+            isFavorite(cityFav);
             displayFavorite();
         }
         else if(localStorage.getItem("favorites") != null && JSON.parse(localStorage.getItem("favorites")).length === 4){
             alert("La limite maximum de favoris a été atteinte (4)");
             return;
         }
-        else addFavorite(event, document.getElementById('city-ttl'));
+        else{
+            addFavorite(event, document.getElementById('city-ttl'));
+            isFavorite(cityFav);
+            displayFavorite();
+        }
     });
 }
 
@@ -131,12 +135,16 @@ function removeFavorite(obj, fav){
     obj.parentElement.remove();
     favoritesTAB = newTab;
     localStorage.setItem("favorites", JSON.stringify(newTab));
+    displayFavorite();
+    isFavorite(fav);
 }
 function removeOnClickButtonFavorite(firstChild,fav){
     let newTab = favoritesTAB.filter(favorite => favorite !== fav);
     favoritesTAB = newTab;
     localStorage.setItem("favorites", JSON.stringify(newTab));
     firstChild.classList.remove("is-favorite");
+    displayFavorite();
+    isFavorite(fav);
 }
 
 // Call functions
