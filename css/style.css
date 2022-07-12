@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
-
 :root{
     font-size: 12px;
 
@@ -13,7 +12,7 @@
 }
 
 body {
-    font-family: arial;    
+    font-family: 'Quicksand', sans-serif;    
     background-image: url(../img/cloud3.mini.jpg);
     background-repeat: no-repeat;
     color: rgb(255, 255, 255);
