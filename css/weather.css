@@ -205,7 +205,7 @@
     .favorite i{
         font-size: 1.5rem;
     }
-    .add-favorite, .remove-favorite{
+    .add-favorite{
         background: none;
     }
     .input-favorite{

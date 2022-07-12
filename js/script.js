@@ -253,7 +253,6 @@ function getAirQualityColor(airQValue, thresholds) {
     }
     return airColor[airColor.length-1];
 }
-
 function getAirQuality(airQValue, thresholds) {
     for (let i = 0; i < thresholds.length; i++) {
         if (airQValue < thresholds[i]) return airQuality[i];
