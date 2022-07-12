@@ -42,6 +42,7 @@ async function waitingForResponse(name) {
         return;
     }; 
 
+    getIcon(todoList)
     getName(todoList)
     getCountry(todoList)
     getTemp(todoList)
@@ -57,6 +58,10 @@ async function waitingForResponse(name) {
 // Conditions //
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
+}
+
+function getIcon(array){
+    document.getElementById("list-cd").innerHTML = `<img class="icon-c" src="${array.current.condition.icon}" alt="weather condition">`;
 }
 
 function getCountry(array){
@@ -83,6 +88,8 @@ function addAndReplace(){
     document.getElementById("input-ttl").classList.replace("displayF", "displayN");
     document.getElementById("first-content").classList.replace("displayN", "displayG");
 }
+
+
 
 // ASTRONOMY //
 async function waitingForResponseAstronomy(name) {
@@ -196,7 +203,7 @@ function geoFindMe(){
         waitingLocalisation(latitude, longitude)
         addAndReplace();
     }
-    
+
     function error() {
         alert('Impossible de retrouver votre localisation')
     }
