@@ -1,4 +1,6 @@
-const airColor = ["cyan", "green", "yellow", "orange", "red", "purple"]
+const airColor = ["darkturquoise", "green", "yellow", "orange", "red", "purple"];
+
+const airQuality = ["Bon", "Moyen", "Dégradé", "Mauvais", "Très Mauvais", "Ext Mauvais"];
 
 const airData = [
     {
@@ -6,30 +8,35 @@ const airData = [
         keyApi: "pm2_5",
         threshold: [10, 20, 25, 50, 75],
         idb: "aq-pm2_5",
+        idq: "aql-pm2_5"
     },
                     {
         id: "pm10",
         keyApi: "pm10",
         threshold: [20, 40, 50, 100, 150],
         idb: "aq-pm10",
+        idq: "aql-pm10"
     },
     {
         id: "no2",
         keyApi: "no2",
         threshold: [40, 90, 120, 230, 340],
         idb: "aq-no2",
+        idq: "aql-no2"
     },
                     {
         id: "o3",
         keyApi: "o3",
         threshold: [50, 100, 130, 240, 380],
         idb: "aq-o3",
+        idq: "aql-o3"
     },
                     {
         id: "so2",
         keyApi: "so2",
         threshold: [100, 200, 350, 500, 750],
         idb: "aq-so2",
+        idq: "aql-so2"
     }
 ];
 
@@ -42,6 +49,7 @@ async function waitingForResponse(name) {
         return;
     }
 
+    getIcon(todoList)
     getName(todoList)
     getCountry(todoList)
     getTemp(todoList)
@@ -60,6 +68,10 @@ function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
 }
 
+function getIcon(array){
+    document.getElementById("list-cd").innerHTML = `<img class="icon-c" src="${array.current.condition.icon}" alt="weather condition">`;
+}
+
 function getCountry(array){
     document.getElementById("country-ttl").innerText = array.location.country;
 }
@@ -67,14 +79,18 @@ function getCountry(array){
 function getTemp(array){
     document.getElementById("condition-tp").innerText = array.current.temp_c + " °C";
 }
+
 function getCondition(array){
     document.getElementById("condition-c").innerText = array.current.condition.text;
 }
+
 function getWind(array){
     document.getElementById("condition-ws").innerText = array.current.wind_kph + " km/h";
 }
+
 document.getElementById("header-form").addEventListener("submit", function(event){
     displayWeather(event)
+    document.getElementById("input-ville").value = "";
 });
 
 function addAndReplace(){
@@ -82,14 +98,43 @@ function addAndReplace(){
     document.getElementById("first-content").classList.replace("displayN", "displayG");
 }
 
-// Autocomplete //
+
+
+// ASTRONOMY //
+async function waitingForResponseAstronomy(name) {
+    if(name === "")return; 
+    const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&dt=2022-07-04`);
+    const todoListAstronomy = await response.json();
+    if(response.status != 200)return; 
+    getSunrise(todoListAstronomy)
+    getSunset(todoListAstronomy)
+}
+
+function getSunrise(array){
+    document.getElementById("sunrise-conditions").innerHTML = array.astronomy.astro.sunrise.replace("AM", "<sup>AM</sup>");
+}
+
+function getSunset(array){
+    document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");
+}
+
+// DISPLAY WEATHER //
+function displayWeather(event) {
+    event.preventDefault()
+    const townValue = document.getElementById("input-ville").value;
+    waitingForResponse(townValue);
+    addAndReplace()
+    waitingForResponseAstronomy(townValue);
+}
+
+// AUTOCOMPLETE //
 let timer;
 function autocomplete(inp){
-    inp.addEventListener("input", function(event){
+    inp.addEventListener("input", function(){
         clearTimeout(timer);
         timer = setTimeout(() => {
             waitingForResponseSearch(document.getElementById("input-ville").value)
-        }, 500);
+        }, 450);
     });
 };
 
@@ -115,7 +160,7 @@ function getComplete(array){
     div.append(a)
 
     array.forEach(cities => {
-        table.push(cities.name)
+        table.push(`${cities.name}, ${cities.country}`)
     })
 
 
@@ -128,6 +173,8 @@ function getComplete(array){
         b.addEventListener("click", function(event){
             document.getElementById("input-ville-autocomplete-list").addEventListener("click", function(event){
                 displayWeather(event)
+                document.getElementById("input-ville").value = "";
+
             })
             input.value = this.getElementsByTagName("input")[0].value;
             closeAllLists();
@@ -136,7 +183,6 @@ function getComplete(array){
     }
 }
 autocomplete(document.getElementById("input-ville"))
-
 
 function closeAllLists(elm){
     let x = document.getElementsByClassName("autocomplete-items");
@@ -150,25 +196,7 @@ document.addEventListener("click", function(event){
     closeAllLists(event.target);
 })
 
-// ASTRONOMY //
-async function waitingForResponseAstronomy(name) {
-    if(name === "")return;
-    const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&dt=2022-07-04`);
-    const todoListAstronomy = await response.json();
-    if(response.status != 200)return;
-    getSunrise(todoListAstronomy)
-    getSunset(todoListAstronomy)
-}
-
-function getSunrise(array){
-    document.getElementById("sunrise-conditions").innerHTML = array.astronomy.astro.sunrise.replace("AM", "<sup>AM</sup>");
-}
-
-function getSunset(array){
-    document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");
-}
-
-// GEOLOCATION //
+// GEOLOCATION // 
 if ("geolocation" in navigator) {
     console.log("geolocation présente")
 } else {
@@ -212,8 +240,10 @@ document.getElementById("find-me").addEventListener('click', geoFindMe)
 function displayAirQuality(api) {
     airData.forEach(index => {
         const indexColor = document.getElementById(index.idb)
+        const indexQual = document.getElementById(index.idq)
         document.getElementById(`${index.id}`).innerText = Math.floor(api[index.keyApi]);
         indexColor.style.backgroundColor = getAirQualityColor(api[index.keyApi], index.threshold)
+        indexQual.innerText = getAirQuality(api[index.keyApi], index.threshold)
     })
 }
 
@@ -223,11 +253,10 @@ function getAirQualityColor(airQValue, thresholds) {
     }
     return airColor[airColor.length-1];
 }
-
-function displayWeather(event) {
-    event.preventDefault()
-    const townValue = document.getElementById("input-ville").value;
-    waitingForResponse(townValue);
-    addAndReplace()
-    waitingForResponseAstronomy(townValue);
+function getAirQuality(airQValue, thresholds) {
+    for (let i = 0; i < thresholds.length; i++) {
+        if (airQValue < thresholds[i]) return airQuality[i];
+    } 
+    return airQuality[airQuality.length-1];
 }
+
