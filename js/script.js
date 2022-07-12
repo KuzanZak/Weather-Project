@@ -49,6 +49,7 @@ async function waitingForResponse(name) {
         return;
     }; 
 
+    getIcon(todoList)
     getName(todoList)
     getCountry(todoList)
     getTemp(todoList)
@@ -66,6 +67,10 @@ function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
 }
 
+function getIcon(array){
+    document.getElementById("list-cd").innerHTML = `<img class="icon-c" src="${array.current.condition.icon}" alt="weather condition">`;
+}
+
 function getCountry(array){
     document.getElementById("country-ttl").innerText = array.location.country;
 }
@@ -73,12 +78,15 @@ function getCountry(array){
 function getTemp(array){
     document.getElementById("condition-tp").innerText = array.current.temp_c + " °C";
 }
+
 function getCondition(array){
     document.getElementById("condition-c").innerText = array.current.condition.text;
 }
+
 function getWind(array){
     document.getElementById("condition-ws").innerText = array.current.wind_kph + " km/h";
 }
+
 document.getElementById("header-form").addEventListener("submit", function(event){
     displayWeather(event)
     document.getElementById("input-ville").value = "";
@@ -89,14 +97,43 @@ function addAndReplace(){
     document.getElementById("first-content").classList.replace("displayN", "displayG");
 }
 
-// Autocomplete //
+
+
+// ASTRONOMY //
+async function waitingForResponseAstronomy(name) {
+    if(name === "")return; 
+    const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&dt=2022-07-04`);
+    const todoListAstronomy = await response.json();
+    if(response.status != 200)return; 
+    getSunrise(todoListAstronomy)
+    getSunset(todoListAstronomy)
+}
+
+function getSunrise(array){
+    document.getElementById("sunrise-conditions").innerHTML = array.astronomy.astro.sunrise.replace("AM", "<sup>AM</sup>");
+}
+
+function getSunset(array){
+    document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");
+}
+
+// DISPLAY WEATHER //
+function displayWeather(event) {
+    event.preventDefault()
+    const townValue = document.getElementById("input-ville").value;
+    waitingForResponse(townValue);
+    addAndReplace()
+    waitingForResponseAstronomy(townValue);
+}
+
+// AUTOCOMPLETE //
 let timer;
 function autocomplete(inp){
-    inp.addEventListener("input", function(event){
+    inp.addEventListener("input", function(){
         clearTimeout(timer);
         timer = setTimeout(() => {
             waitingForResponseSearch(document.getElementById("input-ville").value)
-        }, 500);
+        }, 450);
     });
 };
 
@@ -146,7 +183,6 @@ function getComplete(array){
 }
 autocomplete(document.getElementById("input-ville"))
 
-
 function closeAllLists(elm){
     let x = document.getElementsByClassName("autocomplete-items");
     for (let i = 0; i < x.length; i++) {
@@ -158,24 +194,6 @@ function closeAllLists(elm){
 document.addEventListener("click", function(event){
     closeAllLists(event.target);
 })
-
-// ASTRONOMY //
-async function waitingForResponseAstronomy(name) {
-    if(name === "")return; 
-    const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&dt=2022-07-04`);
-    const todoListAstronomy = await response.json();
-    if(response.status != 200)return; 
-    getSunrise(todoListAstronomy)
-    getSunset(todoListAstronomy)
-}
-
-function getSunrise(array){
-    document.getElementById("sunrise-conditions").innerHTML = array.astronomy.astro.sunrise.replace("AM", "<sup>AM</sup>");
-}
-
-function getSunset(array){
-    document.getElementById("sunset-conditions").innerHTML = array.astronomy.astro.sunset.replace("PM", "<sup>PM</sup>");
-}
 
 // GEOLOCATION // 
 if ("geolocation" in navigator) {
@@ -195,7 +213,7 @@ function geoFindMe(){
         waitingLocalisation(latitude, longitude)
         addAndReplace();
     }
-    
+
     function error() {
         alert('Impossible de retrouver votre localisation')
     }
@@ -240,13 +258,5 @@ function getAirQuality(airQValue, thresholds) {
         if (airQValue < thresholds[i]) return airQuality[i];
     } 
     return airQuality[airQuality.length-1];
-}
-
-function displayWeather(event) {
-    event.preventDefault()
-    const townValue = document.getElementById("input-ville").value;
-    waitingForResponse(townValue);
-    addAndReplace()
-    waitingForResponseAstronomy(townValue);
 }
 
