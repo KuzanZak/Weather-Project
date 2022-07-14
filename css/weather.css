@@ -30,11 +30,12 @@
 }
 .add-favorite{
     float: right;
+    margin-right: .5rem;
     width: 5rem;
-    height: 2.5rem;
+    height: 3rem;
     background: none;
     border: none;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 .favorite .link-menu{
     display: flex;
@@ -63,8 +64,6 @@
 .favorite i{
     font-size: 2rem;
     padding: 0 .3rem;
-}
-.favorite i{
     cursor: alias;
 }
 .is-favorite{
@@ -119,7 +118,7 @@
     border-top: solid 1px;
     border-bottom: solid 1px;
 }
-.weatherTown, .t-container, #first-content{
+.weatherTown, .t-container{
     background: rgb(0,0,0,.1);
 }
 .t-container{
@@ -128,7 +127,7 @@
 .weatherTown dl{
     display: grid;
     grid-template-columns: repeat(3,33%);
-    grid-template-rows: 2.5rem 8rem 1.5rem;
+    grid-template-rows: 2.5rem 6rem 1.5rem;
     width: 85%;
     padding-top: 0.5rem;
     justify-self: center;
@@ -149,14 +148,14 @@
     grid-column: 3;
 }
 .weatherPerday dd.icon-weather0, .weatherPerday dd.icon-weather1, .weatherPerday dd.icon-weather2,
-.weatherTown .current-temp0, .weatherTown .current-temp1 ,.weatherTown .current-temp2{
+.weatherTown .current-temp0, .weatherTown .current-temp1, .weatherTown .current-temp2{
     margin: 0;
+    border-right: solid 1px;
 }
 .weatherPerday dd.icon-weather0{
     grid-column: 1;
     grid-row: 2;
     margin: 0;
-    border-right: solid 1px;
 }
 .weatherPerday dd.icon-weather1{
     grid-column: 2;
@@ -165,6 +164,7 @@
 }
 .weatherPerday dd.icon-weather2, .weatherTown .current-temp2{
     grid-column: 3;
+    border: none;
 }
 .weatherPerday dd.icon-weather2{
     grid-row: 2;
@@ -219,6 +219,18 @@
     }
     .weatherPerday{
         font-size: 2rem;
+    }
+    .weatherTown dl{
+        display: grid;
+        grid-template-columns: repeat(3,33%);
+        grid-template-rows: 2.5rem 10rem 1.5rem;
+        width: 85%;
+        padding-top: 0.5rem;
+        justify-self: center;
+        justify-content: center;
+    }
+    .weatherPerday dd.icon-weather0, .weatherPerday dd.icon-weather1, .weatherPerday dd.icon-weather2{
+        height: 10rem;
     }
     .weatherPerday dd img{
         width: 28%;
