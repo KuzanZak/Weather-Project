@@ -119,6 +119,12 @@
     border-top: solid 1px;
     border-bottom: solid 1px;
 }
+.weatherTown, .t-container, #first-content{
+    background: rgb(0,0,0,.1);
+}
+.t-container{
+    padding-bottom: 2rem;
+}
 .weatherTown dl{
     display: grid;
     grid-template-columns: repeat(3,33%);
