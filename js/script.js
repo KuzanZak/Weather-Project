@@ -66,7 +66,6 @@ async function waitingForResponse(name) {
         alert("Ce lieu n'existe pas!");
         return;
     }
-    console.log(todoList)
 
     getIcon(todoList)
     getName(todoList)
@@ -94,22 +93,6 @@ function modifyBackground(codeApi){
     });
     document.body.style.background = back;
     document.body.style.backgroundSize = `1920px 1280px`;
-    // if (conditions.sunny.code.includes(codeApi)) {
-    //     document.body.style.background = `url(../img/sunny.jpg) no-repeat 70%`;
-    // }
-    // else if (conditions.cloudy.code.includes(codeApi)) {
-    //     document.body.style.background = `url(../img/cloud3.jpg) no-repeat 70%`;
-    // }
-    // else if (conditions.rainy.code.includes(codeApi)) {
-    //     document.body.style.background = `url(../img/rainy.jpg) no-repeat 70%`;
-    // }
-    // else if (conditions.thundery.code.includes(codeApi)) {
-    //     document.body.style.background = `url(../img/thundery.jpg) no-repeat 70%`;
-    // }
-    // else {
-    //     document.body.style.background = `lightseagreen`;
-    // }
-    // document.body.style.backgroundSize = `1920px 1280px`;
 }
 function getName(array){
     document.getElementById("city-ttl").innerText = array.location.name;
@@ -146,14 +129,13 @@ function addAndReplace(){
     document.getElementById("first-content").classList.replace("displayN", "displayG");
 }
 
-
-
 // ASTRONOMY //
 async function waitingForResponseAstronomy(name) {
-    if(name === "")return; 
+    if(name === "") return;
     const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${name}&dt=2022-07-04`);
     const todoListAstronomy = await response.json();
-    if(response.status != 200)return; 
+    if(response.status != 200) return;
+
     getSunrise(todoListAstronomy)
     getSunset(todoListAstronomy)
 }
@@ -244,7 +226,7 @@ document.addEventListener("click", function(event){
     closeAllLists(event.target);
 })
 
-// GEOLOCATION // 
+// GEOLOCATION //
 if ("geolocation" in navigator) {
     console.log("geolocation présente")
 } else {
@@ -274,7 +256,7 @@ function geoFindMe(){
 }
 
 async function waitingLocalisation(Lat,lon) {
-    let date = new Date();
+    const date = new Date();
     const newDate = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
     const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${Lat},${lon}&dt=${newDate}`); //2022-07-04
     const todoListLocalisation = await response.json();
@@ -306,6 +288,6 @@ function getAirQualityColor(airQValue, thresholds) {
 function getAirQuality(airQValue, thresholds) {
     for (let i = 0; i < thresholds.length; i++) {
         if (airQValue < thresholds[i]) return airQuality[i];
-    } 
+    }
     return airQuality[airQuality.length-1];
 }
