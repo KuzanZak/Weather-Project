@@ -66,6 +66,7 @@ async function waitingForResponse(name) {
         alert("Ce lieu n'existe pas!");
         return;
     }
+    console.log(todoList)
 
     getIcon(todoList)
     getName(todoList)
@@ -86,7 +87,6 @@ async function waitingForResponse(name) {
 function modifyBackground(codeApi){
     let back;
     Object.values(conditions).forEach((condition, index) => {
-        console.log(condition.code.includes(codeApi));
         if(condition.code.includes(codeApi)){
             back = `url(../img/${Object.keys(conditions)[index]}.jpg) no-repeat 70%`;
         }
@@ -274,7 +274,9 @@ function geoFindMe(){
 }
 
 async function waitingLocalisation(Lat,lon) {
-    const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${Lat},${lon}&dt=2022-07-04`);
+    let date = new Date();
+    const newDate = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate();
+    const response = await fetch(`https://api.weatherapi.com/v1/astronomy.json?key=bb17b7c52fa045b6aa5113146222906&lang=fr&q=${Lat},${lon}&dt=${newDate}`); //2022-07-04
     const todoListLocalisation = await response.json();
     waitingForResponse(todoListLocalisation.location.name)
     getSunrise(todoListLocalisation);
