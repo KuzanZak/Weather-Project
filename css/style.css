@@ -237,10 +237,15 @@ body {
     color: var(--color-txt);
 }
 
-.icon-th, .icon-ws, .icon-c {
+.icon-th, .icon-ws{
     width: 20%;
 }
-
+.icon-c{
+    width: 6.5rem;
+}
+#list-cd{
+    height: 6rem;
+}
 .conditions-data{
     font-size: 2rem;
 }
@@ -276,8 +281,11 @@ body {
         top: 1%;
         right: 13%;
     }
-    .icon-th, .icon-ws, .icon-c {
+    .icon-th, .icon-ws{
         width: 25%;
+    }
+    .icon-c{
+        width: 7.5rem;
     }
 
 }
