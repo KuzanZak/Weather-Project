@@ -37,7 +37,8 @@ body {
 }
 
 .header-logo-mobile {
-    width: 15%;
+    width: 3rem;
+    margin-right: 2rem;
 }
 .header-logo-desktop{
     display: none;
