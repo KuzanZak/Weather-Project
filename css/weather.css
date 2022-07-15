@@ -202,6 +202,11 @@
         height: 25px;
         background: none;
     }
+    .menu li:nth-child(1){
+        display: none;
+        width: auto;
+        text-align: center;
+    }
     .favorite .link-menu{
         margin: 0 .5rem;
         min-width: 5rem;

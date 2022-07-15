@@ -81,13 +81,13 @@ body {
 .input-ttl{
     color: var(--color-yellow);
     display: none;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    font-size: 4rem;
+    font-size: 3.5rem;
     text-align: center;
     text-transform: uppercase;
     text-decoration: underline;
-    height: 50vh;   
+    height: 50vh;
 }
 
 .displayF{

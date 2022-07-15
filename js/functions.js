@@ -58,14 +58,12 @@ function addFavorite(event, town){
 }
 
 function addFavoriteTitle(){
-    if(innerWidth < 768){
-        const li = document.createElement("li");
-        const div = document.createElement('div');
-        div.classList.add('div-title-favorite');
-        div.append('Favoris');
-        li.appendChild(div);
-        document.querySelector('.menu').insertBefore(li,document.querySelector('.menu li:nth-child(1)'));
-    }
+    const li = document.createElement("li");
+    const div = document.createElement('div');
+    div.classList.add('div-title-favorite');
+    div.append('Favoris');
+    li.appendChild(div);
+    document.querySelector('.menu').insertBefore(li,document.querySelector('.menu li:nth-child(1)'));
 }
 // Display all favorites
 function displayFavorite(){
